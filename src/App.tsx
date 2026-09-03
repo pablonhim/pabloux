@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { CaseStudies } from './components/CaseStudies'
 import { CheckoutModal } from './components/CheckoutModal'
 import { Contact } from './components/Contact'
 import { FAQ } from './components/FAQ'
 import { Footer } from './components/Footer'
+import { Gallery } from './components/Gallery'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { MarqueeDivider } from './components/MarqueeDivider'
@@ -19,7 +19,7 @@ function App() {
       <Header />
       <MarqueeDivider />
       <Hero />
-      <CaseStudies />
+      <Gallery />
       <Store onBuy={setCheckoutProduct} />
       <Process />
       <FAQ />

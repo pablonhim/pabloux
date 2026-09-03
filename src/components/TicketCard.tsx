@@ -21,7 +21,7 @@ export function TicketCard({
       className="flex flex-col border border-border bg-surface text-white"
     >
       <div className="p-6">
-        <span className="font-mono text-xs uppercase tracking-wider text-crimson">
+        <span className="font-mono text-xs uppercase tracking-wider text-electric">
           {product.code}
         </span>
         <h3 className="mt-3 text-lg font-bold text-white">{product.name}</h3>

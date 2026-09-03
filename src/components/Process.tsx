@@ -50,7 +50,7 @@ export function Process() {
             <ArrowRight
               key={i}
               size={16}
-              className="absolute top-0 hidden -translate-x-1/2 -translate-y-1/2 text-crimson lg:block"
+              className="absolute top-0 hidden -translate-x-1/2 -translate-y-1/2 text-electric lg:block"
               style={{ left: `${((i + 1) / steps.length) * 100}%` }}
             />
           ))}
@@ -65,7 +65,7 @@ export function Process() {
               transition={{ duration: 0.5, delay: i * 0.05 }}
               className="border-t border-border pt-4"
             >
-              <span className="font-mono text-sm text-crimson">{step.n}</span>
+              <span className="font-mono text-sm text-electric">{step.n}</span>
               <h3 className="mt-2 text-lg font-bold text-ink">{step.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-ink/70">
                 {step.copy}

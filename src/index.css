@@ -4,17 +4,19 @@
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  /* Tall condensed display face — the PABLO UX wordmark only. */
+  --font-display: 'Bebas Neue', 'Inter', sans-serif;
 
   /* Stark white canvas — no soft grays as the page background. */
   --color-bg: #ffffff;
-  /* High-contrast dark cards (case studies, store receipts, overlays). */
-  --color-surface: #0b0b0c;
-  --color-surface-hover: #17171a;
+  /* High-contrast dark cards (gallery, store receipts, overlays) — a hair of blue undertone. */
+  --color-surface: #07070d;
+  --color-surface-hover: #101018;
   --color-border: #262626;
   /* Primary interactive fill — white, used on dark surfaces. */
   --color-accent: #ffffff;
-  /* Saturated crimson — headline/brand accent color. */
-  --color-crimson: #d31027;
+  /* Bright electric blue — the brand accent color. */
+  --color-electric: #0057ff;
   /* Pure-black/charcoal ink for body copy and mono metadata on the white canvas. */
   --color-ink: #111111;
 
@@ -73,6 +75,6 @@ body {
 }
 
 ::selection {
-  background: var(--color-crimson);
+  background: var(--color-electric);
   color: var(--color-bg);
 }

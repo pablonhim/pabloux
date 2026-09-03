@@ -38,7 +38,7 @@ export function FAQ() {
           <div className="p-6 sm:p-8">
             {faqs.map((item, i) => (
               <div key={item.question}>
-                <p className="font-mono text-sm text-crimson">
+                <p className="font-mono text-sm text-electric">
                   # {item.question}
                 </p>
                 <p className="mt-3 font-mono text-sm leading-relaxed text-white/70">

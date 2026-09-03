@@ -28,7 +28,7 @@ export function CaseStudySpecModal({
         >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-crimson">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-electric">
                 [{study.code}]
               </span>
               <h3 className="mt-3 text-xl font-bold text-white">
@@ -39,7 +39,7 @@ export function CaseStudySpecModal({
               type="button"
               onClick={onClose}
               aria-label="Close spec"
-              className="shrink-0 p-1 text-white/60 transition-colors hover:text-crimson"
+              className="shrink-0 p-1 text-white/60 transition-colors hover:text-electric"
             >
               <X size={18} />
             </button>
@@ -71,7 +71,7 @@ export function CaseStudySpecModal({
                   key={highlight}
                   className="flex gap-2 text-sm leading-relaxed text-white/70"
                 >
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-crimson" />
+                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-electric" />
                   {highlight}
                 </li>
               ))}

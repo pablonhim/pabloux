@@ -17,7 +17,7 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="col-span-12 sm:col-start-6 sm:col-span-7 lg:col-start-7 lg:col-span-6"
         >
-          <h2 className="text-3xl font-bold leading-tight text-crimson md:text-5xl">
+          <h2 className="text-3xl font-bold leading-tight text-electric md:text-5xl">
             Bridging enterprise product strategy
             <span className="mt-2 block font-serif text-3xl font-normal text-ink italic md:text-5xl">
               with AI-driven execution
@@ -32,9 +32,9 @@ export function Hero() {
           </p>
 
           <p className="mt-8 font-mono text-xs uppercase tracking-wider text-ink/60">
-            Strategy <span className="text-crimson">+</span> Execution{' '}
-            <span className="text-crimson">+</span> AI{' '}
-            <span className="text-crimson">=</span> Shipped Product
+            Strategy <span className="text-electric">+</span> Execution{' '}
+            <span className="text-electric">+</span> AI{' '}
+            <span className="text-electric">=</span> Shipped Product
           </p>
         </motion.div>
       </div>
@@ -47,8 +47,8 @@ export function Hero() {
 
         <span className="flex items-center gap-2">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-crimson animate-pulse-ring" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-crimson" />
+            <span className="absolute inline-flex h-full w-full rounded-full bg-electric animate-pulse-ring" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-electric" />
           </span>
           Open for strategy contracts
         </span>

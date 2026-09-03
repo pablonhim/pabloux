@@ -25,7 +25,7 @@ export function PackageCard({
       className="relative border border-border bg-surface text-white"
     >
       <div className="p-6">
-        <span className="inline-block w-fit border border-border bg-black px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-crimson">
+        <span className="inline-block w-fit border border-border bg-black px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-electric">
           {packageId}
         </span>
         <h3 className="mt-4 text-lg font-bold text-white">{name}</h3>

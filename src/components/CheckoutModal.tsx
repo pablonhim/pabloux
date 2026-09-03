@@ -105,7 +105,7 @@ export function CheckoutModal({
         >
           <div className="flex items-start justify-between">
             <div>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-crimson">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-electric">
                 Pay with Bakong KHQR
               </span>
               <h3 className="mt-1 text-lg font-bold text-white">
@@ -116,7 +116,7 @@ export function CheckoutModal({
               type="button"
               onClick={onClose}
               aria-label="Close checkout"
-              className="p-1 text-white/60 transition-colors hover:text-crimson"
+              className="p-1 text-white/60 transition-colors hover:text-electric"
             >
               <X size={18} />
             </button>
@@ -127,7 +127,7 @@ export function CheckoutModal({
               <EmailCaptureForm onSubmit={setEmail} />
             ) : status === 'paid' ? (
               <div className="flex flex-col items-center gap-3 py-8 text-center">
-                <CheckCircle2 className="text-crimson" size={40} />
+                <CheckCircle2 className="text-electric" size={40} />
                 <p className="text-sm font-medium text-white">
                   Payment confirmed
                 </p>
