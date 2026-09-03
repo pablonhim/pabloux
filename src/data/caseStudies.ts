@@ -7,44 +7,58 @@ export interface CaseStudySpec {
 
 export interface CaseStudy {
   id: string
+  /** Monospace ID tag, e.g. "PKG/FIN.01" */
+  code: string
   name: string
-  client: string
-  category: string
-  summary: string
-  tags: string[]
+  oneLiner: string
   spec: CaseStudySpec
 }
 
 export const caseStudies: CaseStudy[] = [
   {
     id: 'b2b-multi-bank',
-    name: 'Enterprise B2B Banking & Multi-Bank Platform',
-    client: 'Multi-Bank Consortium — Cambodia',
-    category: 'FINTECH / BANKING',
-    summary:
-      'Owned the product for an enterprise B2B gateway that lets corporate clients inquire balances and transaction activity across up to 18 partner banks from one dashboard, governed by a role-based access control (RBAC) model for approvals and visibility.',
-    tags: ['18 BANKS', 'RBAC', 'BALANCE INQUIRY', 'APPROVAL WORKFLOW'],
+    code: 'PKG/FIN.01',
+    name: 'Enterprise B2B Multi-Bank Platform',
+    oneLiner:
+      'Inquire balances across 18 Cambodian banks from one dashboard, governed by a full RBAC permissions matrix.',
     spec: {
       role: 'Senior Product Owner',
       overview:
         'Enterprise treasury teams needed one place to inquire balances and activity instead of logging into up to 18 separate bank portals. I owned the product definition for the inquiry gateway and the permissioning model governing it.',
       highlights: [
         'Designed the multi-bank inquiry flow spanning up to 18 partner banks behind one authenticated session.',
-        'Defined the RBAC model — roles, scopes, and approval chains — so finance, treasury, and admin users see only what their role permits.',
+        'Defined the RBAC permissions matrix — roles, scopes, and approval chains — so finance, treasury, and admin users see only what their role permits.',
         "Worked with engineering to normalize each bank's differing API/response shape into one consistent inquiry response.",
         'Ran UAT with enterprise treasury teams to validate approval-chain edge cases before rollout.',
       ],
-      stack: ['RBAC governance', 'Multi-bank API orchestration', 'Audit logging'],
+      stack: ['RBAC permissions matrix', 'Multi-bank API orchestration', 'Audit logging'],
+    },
+  },
+  {
+    id: 'oto-delivery',
+    code: 'PKG/LOG.02',
+    name: 'OTO Delivery — Multi-Pin Routing',
+    oneLiner:
+      'Multi-pin location drop-offs and a driver HUD UX for real-time last-mile routing decisions.',
+    spec: {
+      role: 'Product Owner',
+      overview:
+        'OTO drivers needed to handle multiple drop-offs in a single run without losing track of sequence or ETA. I owned the multi-pin routing flow and the in-app driver HUD that surfaces the next stop, distance, and customer instructions at a glance.',
+      highlights: [
+        'Designed the multi-pin drop-off flow so a single delivery run carries ordered stops instead of one pin per trip.',
+        'Defined the driver HUD UX — next-stop distance, ETA, and customer notes surfaced without leaving the map view.',
+        'Worked with engineering on re-sequencing logic when a drop-off is skipped, delayed, or added mid-route.',
+        'Ran driver-side field tests to cut the taps needed to complete a multi-stop run.',
+      ],
+      stack: ['Multi-pin routing', 'Driver HUD UX', 'Real-time ETA calculation'],
     },
   },
   {
     id: 'plasfooddou',
-    name: 'PlasFoodDou Eco-Reward Mobile App',
-    client: 'PlasFoodDou',
-    category: 'SUSTAINABILITY / MOBILE',
-    summary:
-      'Owned the product for a mobile eco-reward app where customers scan a QR code at checkout to earn rewards for using reusable packaging, backed by merchant-side POS integrations that validate and settle each redemption in real time.',
-    tags: ['QR SCAN', 'MERCHANT POS', 'ECO-REWARDS', 'MOBILE'],
+    code: 'PKG/ECO.03',
+    name: 'PlasFoodDou Eco-Rewards',
+    oneLiner:
+      'QR-scan eco-rewards for reusable packaging, backed by merchant POS integrations at checkout.',
     spec: {
       role: 'Product Owner',
       overview:
@@ -59,41 +73,18 @@ export const caseStudies: CaseStudy[] = [
     },
   },
   {
-    id: 'oto-delivery',
-    name: 'OTO Payment & Authentication Flow',
-    client: 'OTO',
-    category: 'FINTECH / AUTH',
-    summary:
-      "Owned OTO's payment and authentication experience, including a multi-factor authentication flow and a set of dynamic modal states that adapt to the user's verification method, payment status, and error/retry path without leaving checkout.",
-    tags: ['MFA', 'DYNAMIC MODALS', 'PAYMENT AUTH', 'ERROR HANDLING'],
-    spec: {
-      role: 'Product Owner',
-      overview:
-        'Payment authentication needed to stay secure without breaking checkout momentum. I owned the flow design connecting multi-factor auth to a single modal component that changes state rather than forcing a page reload.',
-      highlights: [
-        'Mapped every authentication and payment state (pending, MFA challenge, retry, success, failure) into one dynamic modal state machine.',
-        'Defined the multi-factor auth flow and its fallback paths for expired or failed challenges.',
-        'Reduced checkout drop-off by keeping the user in one continuous modal instead of redirecting across pages.',
-        'Worked with engineering and security to balance verification friction against conversion.',
-      ],
-      stack: ['Multi-factor auth', 'Modal state machine', 'Payment gateway integration'],
-    },
-  },
-  {
     id: 'home-service',
+    code: 'PKG/SVC.04',
     name: 'Home Service Booking Platform',
-    client: 'Home Service',
-    category: 'CONSUMER / SERVICES',
-    summary:
-      'Owned the booking product for an on-demand home services platform, designing a multi-step booking funnel that matches customers to available providers by location, service type, and schedule.',
-    tags: ['BOOKING FUNNEL', 'LOCATION MATCHING', 'MULTI-STEP UX', 'PROVIDER SUPPLY'],
+    oneLiner:
+      'On-demand technician booking funnel matching customers to providers by location, service, and schedule.',
     spec: {
       role: 'Product Owner',
       overview:
-        'Booking a home service involves several dependent choices — service type, location, and time. I owned the multi-step funnel and the location-matching logic that pairs each booking with an available nearby provider.',
+        'Booking a home service involves several dependent choices — service type, location, and time. I owned the multi-step funnel and the location-matching logic that pairs each booking with an available nearby technician.',
       highlights: [
         'Designed the multi-step booking funnel (service → location → schedule → confirm) to reduce drop-off between steps.',
-        'Defined the location-matching logic that pairs bookings with available providers by proximity, service category, and schedule.',
+        'Defined the location-matching logic that pairs bookings with available technicians by proximity, service category, and schedule.',
         'Aligned three squads (booking, provider ops, and payments) around one activation metric for the funnel.',
         'Ran usability sessions to simplify the steps where users most often abandoned the funnel.',
       ],

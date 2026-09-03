@@ -1,71 +1,52 @@
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
-import { StatusBadge } from './StatusBadge'
+import { LiveClock } from './LiveClock'
 
 export function Hero() {
   return (
     <section
       id="top"
-      className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 pb-20 pt-24 sm:pt-32"
+      className="relative min-h-[75vh] border-b border-border sm:min-h-[85vh]"
     >
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={fadeInUpViewport}
-        variants={fadeInUp}
-        transition={{ duration: 0.5 }}
-      >
-        <StatusBadge />
-      </motion.div>
-
-      <motion.h1
-        initial="hidden"
-        whileInView="visible"
-        viewport={fadeInUpViewport}
-        variants={fadeInUp}
-        transition={{ duration: 0.5, delay: 0.05 }}
-        className="max-w-3xl text-4xl font-semibold tracking-tight text-text sm:text-6xl"
-      >
-        Product strategy that ships,{' '}
-        <span className="text-text-muted">not just decks.</span>
-      </motion.h1>
-
-      <motion.p
-        initial="hidden"
-        whileInView="visible"
-        viewport={fadeInUpViewport}
-        variants={fadeInUp}
-        transition={{ duration: 0.5, delay: 0.1 }}
-        className="max-w-2xl text-lg text-text-muted"
-      >
-        Senior Product Owner and AI Product Lead. I run discovery-to-delivery
-        for fintech, logistics, and services platforms — turning ambiguous
-        problems into roadmaps engineering teams can actually build.
-      </motion.p>
-
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={fadeInUpViewport}
-        variants={fadeInUp}
-        transition={{ duration: 0.5, delay: 0.15 }}
-        className="flex flex-wrap items-center gap-3 pt-2"
-      >
-        <a
-          href="#case-studies"
-          className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+      <div className="grid grid-cols-12 gap-4 px-4 pt-16 pb-28 sm:px-6 sm:pt-24">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={fadeInUpViewport}
+          variants={fadeInUp}
+          transition={{ duration: 0.6 }}
+          className="col-span-12 sm:col-start-6 sm:col-span-7 lg:col-start-7 lg:col-span-6"
         >
-          View case studies
-          <ArrowRight size={16} />
-        </a>
-        <a
-          href="#store"
-          className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-text transition-colors hover:border-text-muted"
-        >
-          Browse the store
-        </a>
-      </motion.div>
+          <h2 className="text-3xl font-bold leading-tight text-crimson md:text-5xl">
+            Bridging enterprise product strategy
+            <span className="mt-2 block font-serif text-3xl font-normal text-ink italic md:text-5xl">
+              with AI-driven execution
+            </span>
+          </h2>
+          <p className="mt-6 max-w-xl text-sm leading-relaxed text-ink/80 sm:text-base">
+            I architect complex B2B banking logic across multi-bank RBAC
+            systems, multi-pin driver logistics for last-mile delivery, and
+            eco-reward consumer apps. Ten years turning ambiguous enterprise
+            problems into high-impact design workflows engineering teams can
+            actually ship.
+          </p>
+        </motion.div>
+      </div>
+
+      <div className="absolute bottom-4 left-4 right-4 flex flex-col gap-2 font-mono text-[11px] uppercase tracking-wider text-ink sm:bottom-6 sm:left-6 sm:right-6 sm:flex-row sm:items-center sm:justify-between">
+        <span>
+          LOCAL TIME <LiveClock /> <span className="mx-2">|</span>
+          PHNOM PENH, KH
+        </span>
+
+        <span className="flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-crimson animate-pulse-ring" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-crimson" />
+          </span>
+          Open for strategy contracts
+        </span>
+      </div>
     </section>
   )
 }

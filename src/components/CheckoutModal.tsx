@@ -89,7 +89,7 @@ export function CheckoutModal({
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -101,14 +101,14 @@ export function CheckoutModal({
           exit={{ opacity: 0, y: 12, scale: 0.98 }}
           transition={{ duration: 0.2 }}
           onClick={(e) => e.stopPropagation()}
-          className="w-full max-w-sm rounded-2xl border border-border bg-surface p-6"
+          className="w-full max-w-sm border border-border bg-surface p-6 text-white"
         >
           <div className="flex items-start justify-between">
             <div>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-text-muted">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-crimson">
                 Pay with Bakong KHQR
               </span>
-              <h3 className="mt-1 text-lg font-semibold text-text">
+              <h3 className="mt-1 text-lg font-bold text-white">
                 {product.name}
               </h3>
             </div>
@@ -116,7 +116,7 @@ export function CheckoutModal({
               type="button"
               onClick={onClose}
               aria-label="Close checkout"
-              className="rounded-md p-1 text-text-muted transition-colors hover:text-text"
+              className="p-1 text-white/60 transition-colors hover:text-crimson"
             >
               <X size={18} />
             </button>
@@ -127,65 +127,65 @@ export function CheckoutModal({
               <EmailCaptureForm onSubmit={setEmail} />
             ) : status === 'paid' ? (
               <div className="flex flex-col items-center gap-3 py-8 text-center">
-                <CheckCircle2 className="text-success" size={40} />
-                <p className="text-sm font-medium text-text">
+                <CheckCircle2 className="text-crimson" size={40} />
+                <p className="text-sm font-medium text-white">
                   Payment confirmed
                 </p>
-                <p className="max-w-[240px] text-xs text-text-muted">
+                <p className="max-w-[240px] text-xs text-white/60">
                   Your download started automatically, and the link was
                   emailed to {email}.
                 </p>
                 <button
                   type="button"
                   onClick={() => triggerDownload(product.fileName, product)}
-                  className="mt-2 rounded-lg border border-border px-4 py-2 text-xs font-medium text-text transition-colors hover:border-text-muted"
+                  className="mt-2 border border-border px-4 py-2 font-mono text-xs uppercase tracking-wider text-white transition-colors hover:border-white/60"
                 >
                   Download again
                 </button>
               </div>
             ) : status === 'expired' ? (
               <div className="flex flex-col items-center gap-3 py-8 text-center">
-                <p className="text-sm font-medium text-text">QR expired</p>
-                <p className="max-w-[240px] text-xs text-text-muted">
+                <p className="text-sm font-medium text-white">QR expired</p>
+                <p className="max-w-[240px] text-xs text-white/60">
                   This payment window closed. Reopen checkout to try again.
                 </p>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="mt-2 rounded-lg bg-accent px-4 py-2 text-xs font-medium text-bg"
+                  className="mt-2 bg-accent px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink"
                 >
                   Close
                 </button>
               </div>
             ) : (
               <>
-                <div className="rounded-xl border border-border bg-white p-3">
+                <div className="border border-border bg-white p-3">
                   {qrDataUrl ? (
                     <img src={qrDataUrl} alt="Bakong KHQR payment code" width={200} height={200} />
                   ) : (
                     <div className="flex h-[200px] w-[200px] items-center justify-center">
-                      <Loader2 className="animate-spin text-bg" size={24} />
+                      <Loader2 className="animate-spin text-ink" size={24} />
                     </div>
                   )}
                 </div>
 
                 <div className="text-center">
-                  <p className="font-mono text-2xl font-semibold text-text">
+                  <p className="font-mono text-2xl font-bold text-white">
                     ${product.priceUsd.toFixed(2)}
                   </p>
-                  <p className="mt-1 font-mono text-xs text-text-muted">
+                  <p className="mt-1 font-mono text-xs text-white/60">
                     Order {order?.orderId ?? '—'}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 rounded-full border border-border px-3 py-1.5">
-                  <Loader2 className="animate-spin text-text-muted" size={14} />
-                  <span className="font-mono text-xs text-text-muted">
+                <div className="flex items-center gap-2 border border-border px-3 py-1.5">
+                  <Loader2 className="animate-spin text-white/60" size={14} />
+                  <span className="font-mono text-xs uppercase tracking-wider text-white/60">
                     Waiting for payment · expires in {mm}:{ss}
                   </span>
                 </div>
 
-                <p className="max-w-[260px] text-center text-xs text-text-muted">
+                <p className="max-w-[260px] text-center text-xs text-white/60">
                   Scan with any Bakong-linked banking app. The download link
                   is emailed to you automatically once the payment webhook
                   confirms.
@@ -210,11 +210,11 @@ function EmailCaptureForm({ onSubmit }: { onSubmit: (email: string) => void }) {
       }}
       className="flex w-full flex-col gap-4 py-2"
     >
-      <p className="text-center text-sm text-text-muted">
+      <p className="text-center text-sm text-white/60">
         Where should we send your download link?
       </p>
-      <div className="flex items-center gap-2 rounded-lg border border-border bg-bg px-3 py-2">
-        <Mail size={16} className="shrink-0 text-text-muted" />
+      <div className="flex items-center gap-2 border border-border bg-black px-3 py-2">
+        <Mail size={16} className="shrink-0 text-white/60" />
         <input
           type="email"
           required
@@ -222,12 +222,12 @@ function EmailCaptureForm({ onSubmit }: { onSubmit: (email: string) => void }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="you@company.com"
-          className="w-full bg-transparent text-sm text-text placeholder:text-text-muted focus:outline-none"
+          className="w-full bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none"
         />
       </div>
       <button
         type="submit"
-        className="rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+        className="bg-accent px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-ink transition-opacity hover:opacity-90"
       >
         Continue to payment
       </button>
