@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 
 const steps = [
@@ -44,7 +45,16 @@ export function Process() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="relative grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.slice(0, -1).map((_, i) => (
+            <ArrowRight
+              key={i}
+              size={16}
+              className="absolute top-0 hidden -translate-x-1/2 -translate-y-1/2 text-crimson lg:block"
+              style={{ left: `${((i + 1) / steps.length) * 100}%` }}
+            />
+          ))}
+
           {steps.map((step, i) => (
             <motion.div
               key={step.n}

@@ -2,6 +2,7 @@ const navLinks = [
   { label: 'Case Studies', href: '#case-studies' },
   { label: 'Digital Store', href: '#store' },
   { label: 'Process', href: '#process' },
+  { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
 ]
 

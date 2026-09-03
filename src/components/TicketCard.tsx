@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Scissors } from 'lucide-react'
 import type { Product } from '../data/products'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 
@@ -33,6 +34,10 @@ export function TicketCard({
       <div className="relative border-t border-dashed border-neutral-700">
         <span className="absolute -left-2 -top-2 h-4 w-4 rounded-full bg-bg" />
         <span className="absolute -right-2 -top-2 h-4 w-4 rounded-full bg-bg" />
+        <span className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 bg-surface px-2 font-mono text-[9px] uppercase tracking-widest text-white/40">
+          <Scissors size={10} />
+          Tear along line
+        </span>
       </div>
 
       <div className="flex items-center justify-between p-6">

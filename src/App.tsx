@@ -2,9 +2,11 @@ import { useState } from 'react'
 import { CaseStudies } from './components/CaseStudies'
 import { CheckoutModal } from './components/CheckoutModal'
 import { Contact } from './components/Contact'
+import { FAQ } from './components/FAQ'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
+import { MarqueeDivider } from './components/MarqueeDivider'
 import { Process } from './components/Process'
 import { Store } from './components/Store'
 import type { Product } from './data/products'
@@ -15,10 +17,12 @@ function App() {
   return (
     <div className="min-h-svh bg-bg text-ink">
       <Header />
+      <MarqueeDivider />
       <Hero />
       <CaseStudies />
       <Store onBuy={setCheckoutProduct} />
       <Process />
+      <FAQ />
       <Contact />
       <Footer />
 

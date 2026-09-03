@@ -63,19 +63,24 @@ Rules:
 ## Full Page Layout
 
 Sections appear in this order, matching the header nav (Case Studies →
-Digital Store → Process → Contact):
+Digital Store → Process → FAQ → Contact):
 
 1. **Header** — a giant edge-to-edge display wordmark ("CHANBOREY"),
    `font-black`, uppercase, crimson, `clamp(4rem, 15vw, 18rem)`, zero
    line-height. A minimal, un-padded nav row sits directly beneath it:
-   title left, `Case Studies | Digital Store | Process | Contact` center,
-   email right.
+   title left, `Case Studies | Digital Store | Process | FAQ | Contact`
+   center, email right. Directly below the header sits a `MarqueeDivider` —
+   a thin, continuously-scrolling strip of digits (decorative texture only,
+   no copy) that separates the header from the hero.
 2. **Hero** — asymmetrical: headline copy sits on a 12-column grid, pushed
    right to start around column 6/7, never centered. Dual-font headline
-   (crimson sans-black first line, black serif-italic second line). Fixed
-   corner metadata pinned to the bottom of the hero viewport: local time
-   (live GMT+7 clock) + location bottom-left, a pulsing crimson
-   "available for strategy contracts" indicator bottom-right.
+   (crimson sans-black first line, black serif-italic second line), followed
+   by a mono "equation" tagline (`Strategy + Execution + AI = Shipped
+   Product`, crimson operators). Fixed corner metadata pinned to the bottom
+   of the hero viewport: local time (live GMT+7 clock) + location
+   bottom-left, a pulsing crimson "available for strategy contracts"
+   indicator bottom-right — stacked vertically instead of side-by-side below
+   the `sm` breakpoint so they never overlap.
 3. **Selected Enterprise Case Studies** — four case studies, always in this
    order:
    - `PKG/FIN.01` Enterprise B2B Multi-Bank Platform
@@ -86,16 +91,35 @@ Digital Store → Process → Contact):
    a crimson mono ID tag and a "View Spec" trigger opening a modal (role,
    overview, highlights, stack) — same dark styling as the card.
 4. **Digital Asset Store** — "Neutomni tear-off receipt" packages: dark
-   cards with a centered `border-dashed` horizontal divider and punched
-   circle notches (cut into the card edges using the page's `--bg` color),
-   a mono ID tag (`NEU/PKG.0x`), price ($29–$49), and a white checkout
-   button (`bg-accent text-ink`) wired to the Bakong KHQR checkout modal.
+   cards with a centered `border-dashed` horizontal divider (labeled
+   `✂ Tear along line` in mono micro-copy) and punched circle notches (cut
+   into the card edges using the page's `--bg` color), a mono ID tag
+   (`NEU/PKG.0x`), price ($29–$49), and a white checkout button
+   (`bg-accent text-ink`) wired to the Bakong KHQR checkout modal.
 5. **Process** — a short 4-step editorial breakdown of how engagements run,
-   light canvas, bold ink numbers with crimson accents.
-6. **Contact** — light canvas, bold headline with one crimson word, a
+   light canvas, bold ink numbers with crimson accents, connected by small
+   crimson arrow icons between steps at the `lg` breakpoint.
+6. **FAQ** — styled as a code editor file: a dark `--surface` panel with a
+   `FAQ.md` file-tab header, questions rendered as mono `# Question`
+   headings in crimson, answers in mono white/70, separated by dashed
+   rules. Content in `src/data/faq.ts` must always be Chanborey's own real
+   answers — never fabricated.
+7. **Contact** — light canvas, bold headline with one crimson word, a
    crimson-underlined mono email link (not a boxed button — a white button
    would vanish against the white canvas here).
-7. **Footer** — a single mono copyright line.
+8. **Footer** — a mono copyright line plus a live GMT+7 clock.
+
+### On matching neutomni.com
+
+The visual language above (editorial dark/white contrast, tear-off receipt
+UI, mono ID tags, digit marquee, equation taglines, FAQ-as-code-file) is
+deliberately inspired by neutomni.com's aesthetic and interaction patterns.
+That inspiration is style/structure only. Never port neutomni.com's actual
+business content onto this site: no their team names, client names/case
+studies, testimonials, pricing, contact details, or branding. Every section
+here uses Nhim Chanborey's own real information, or is left as an
+explicitly-marked placeholder in `src/data/` until real content exists —
+never a fabricated testimonial or client attributed to a real name.
 
 ### Bakong KHQR Checkout
 

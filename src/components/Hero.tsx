@@ -30,6 +30,12 @@ export function Hero() {
             problems into high-impact design workflows engineering teams can
             actually ship.
           </p>
+
+          <p className="mt-8 font-mono text-xs uppercase tracking-wider text-ink/60">
+            Strategy <span className="text-crimson">+</span> Execution{' '}
+            <span className="text-crimson">+</span> AI{' '}
+            <span className="text-crimson">=</span> Shipped Product
+          </p>
         </motion.div>
       </div>
 
