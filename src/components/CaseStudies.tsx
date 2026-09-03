@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion'
-import { caseStudies } from '../data/caseStudies'
+import { ArrowUpRight } from 'lucide-react'
+import { useState } from 'react'
+import { caseStudies, type CaseStudy } from '../data/caseStudies'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
+import { CaseStudySpecModal } from './CaseStudySpecModal'
 
 export function CaseStudies() {
+  const [activeStudy, setActiveStudy] = useState<CaseStudy | null>(null)
+
   return (
     <section id="case-studies" className="border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-20">
@@ -33,9 +38,9 @@ export function CaseStudies() {
               viewport={fadeInUpViewport}
               variants={fadeInUp}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group rounded-xl border border-border bg-surface p-6 transition-colors hover:bg-surface-hover"
+              className="group flex flex-col rounded-xl border border-border bg-surface p-6 transition-colors hover:bg-surface-hover"
             >
-              <span className="inline-block rounded-md border border-border bg-bg px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-text-muted">
+              <span className="inline-block w-fit rounded-md border border-border bg-bg px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-text-muted">
                 {study.category}
               </span>
 
@@ -50,22 +55,36 @@ export function CaseStudies() {
                 {study.summary}
               </p>
 
-              <dl className="mt-6 grid grid-cols-3 gap-3 border-t border-border pt-4">
-                {study.metrics.map((metric) => (
-                  <div key={metric.label}>
-                    <dt className="font-mono text-[10px] uppercase tracking-wider text-text-muted">
-                      {metric.label}
-                    </dt>
-                    <dd className="mt-1 text-base font-semibold text-text">
-                      {metric.value}
-                    </dd>
-                  </div>
+              <div className="mt-6 flex flex-wrap gap-2 border-t border-border pt-4">
+                {study.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-md border border-border bg-bg px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-text-muted"
+                  >
+                    {tag}
+                  </span>
                 ))}
-              </dl>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setActiveStudy(study)}
+                className="mt-6 inline-flex w-fit items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-text transition-colors hover:text-text-muted"
+              >
+                View spec
+                <ArrowUpRight size={14} />
+              </button>
             </motion.article>
           ))}
         </div>
       </div>
+
+      {activeStudy && (
+        <CaseStudySpecModal
+          study={activeStudy}
+          onClose={() => setActiveStudy(null)}
+        />
+      )}
     </section>
   )
 }

@@ -1,65 +1,103 @@
+export interface CaseStudySpec {
+  role: string
+  overview: string
+  highlights: string[]
+  stack: string[]
+}
+
 export interface CaseStudy {
   id: string
   name: string
   client: string
   category: string
   summary: string
-  metrics: { label: string; value: string }[]
+  tags: string[]
+  spec: CaseStudySpec
 }
 
-// Demo content — replace with real client-approved case study copy before
-// publishing publicly.
 export const caseStudies: CaseStudy[] = [
   {
     id: 'b2b-multi-bank',
-    name: 'B2B Multi-Bank',
-    client: 'Regional Banking Consortium',
+    name: 'Enterprise B2B Banking & Multi-Bank Platform',
+    client: 'Multi-Bank Consortium — Cambodia',
     category: 'FINTECH / BANKING',
     summary:
-      'Led product for a multi-bank B2B settlement platform, unifying reconciliation across 6 partner banks into a single ledger and approval workflow.',
-    metrics: [
-      { label: 'Settlement time', value: '-68%' },
-      { label: 'Partner banks live', value: '6' },
-      { label: 'Manual recon hours/mo', value: '-420h' },
-    ],
+      'Owned the product for an enterprise B2B gateway that lets corporate clients inquire balances and transaction activity across up to 18 partner banks from one dashboard, governed by a role-based access control (RBAC) model for approvals and visibility.',
+    tags: ['18 BANKS', 'RBAC', 'BALANCE INQUIRY', 'APPROVAL WORKFLOW'],
+    spec: {
+      role: 'Senior Product Owner',
+      overview:
+        'Enterprise treasury teams needed one place to inquire balances and activity instead of logging into up to 18 separate bank portals. I owned the product definition for the inquiry gateway and the permissioning model governing it.',
+      highlights: [
+        'Designed the multi-bank inquiry flow spanning up to 18 partner banks behind one authenticated session.',
+        'Defined the RBAC model — roles, scopes, and approval chains — so finance, treasury, and admin users see only what their role permits.',
+        "Worked with engineering to normalize each bank's differing API/response shape into one consistent inquiry response.",
+        'Ran UAT with enterprise treasury teams to validate approval-chain edge cases before rollout.',
+      ],
+      stack: ['RBAC governance', 'Multi-bank API orchestration', 'Audit logging'],
+    },
   },
   {
     id: 'plasfooddou',
-    name: 'PlasFoodDou',
+    name: 'PlasFoodDou Eco-Reward Mobile App',
     client: 'PlasFoodDou',
-    category: 'FOOD TECH / MARKETPLACE',
+    category: 'SUSTAINABILITY / MOBILE',
     summary:
-      'Owned the roadmap for a food-packaging marketplace connecting manufacturers to F&B buyers, from zero to a repeatable B2B ordering flow.',
-    metrics: [
-      { label: 'Time to first order', value: '-54%' },
-      { label: 'Repeat buyer rate', value: '+31%' },
-      { label: 'SKUs onboarded', value: '1,200+' },
-    ],
+      'Owned the product for a mobile eco-reward app where customers scan a QR code at checkout to earn rewards for using reusable packaging, backed by merchant-side POS integrations that validate and settle each redemption in real time.',
+    tags: ['QR SCAN', 'MERCHANT POS', 'ECO-REWARDS', 'MOBILE'],
+    spec: {
+      role: 'Product Owner',
+      overview:
+        'PlasFoodDou rewards customers for cutting single-use plastic. I owned the reward loop from QR scan to redemption, and the merchant-facing POS integration that makes each scan verifiable at checkout.',
+      highlights: [
+        'Designed the QR scan-to-reward flow: generate, scan, validate, and credit rewards within one checkout interaction.',
+        'Scoped merchant POS integrations so participating stores could validate and settle redemptions without extra hardware.',
+        'Defined duplicate-scan and fraud safeguards to keep the reward ledger trustworthy for merchants.',
+        'Partnered with merchant operations to onboard and train store staff on the redemption flow.',
+      ],
+      stack: ['QR generation & scanning', 'POS integration', 'Reward ledger'],
+    },
   },
   {
     id: 'oto-delivery',
-    name: 'OTO Delivery',
-    client: 'OTO Delivery',
-    category: 'LOGISTICS / ON-DEMAND',
+    name: 'OTO Payment & Authentication Flow',
+    client: 'OTO',
+    category: 'FINTECH / AUTH',
     summary:
-      'Rebuilt the dispatcher and rider allocation logic for a last-mile delivery app, cutting average dispatch latency during peak load.',
-    metrics: [
-      { label: 'Dispatch latency', value: '-41%' },
-      { label: 'Rider utilization', value: '+22%' },
-      { label: 'On-time deliveries', value: '96.4%' },
-    ],
+      "Owned OTO's payment and authentication experience, including a multi-factor authentication flow and a set of dynamic modal states that adapt to the user's verification method, payment status, and error/retry path without leaving checkout.",
+    tags: ['MFA', 'DYNAMIC MODALS', 'PAYMENT AUTH', 'ERROR HANDLING'],
+    spec: {
+      role: 'Product Owner',
+      overview:
+        'Payment authentication needed to stay secure without breaking checkout momentum. I owned the flow design connecting multi-factor auth to a single modal component that changes state rather than forcing a page reload.',
+      highlights: [
+        'Mapped every authentication and payment state (pending, MFA challenge, retry, success, failure) into one dynamic modal state machine.',
+        'Defined the multi-factor auth flow and its fallback paths for expired or failed challenges.',
+        'Reduced checkout drop-off by keeping the user in one continuous modal instead of redirecting across pages.',
+        'Worked with engineering and security to balance verification friction against conversion.',
+      ],
+      stack: ['Multi-factor auth', 'Modal state machine', 'Payment gateway integration'],
+    },
   },
   {
     id: 'home-service',
-    name: 'Home Service',
+    name: 'Home Service Booking Platform',
     client: 'Home Service',
     category: 'CONSUMER / SERVICES',
     summary:
-      'Defined and shipped a booking-to-payment flow for on-demand home services, aligning three squads around one activation metric.',
-    metrics: [
-      { label: 'Booking completion', value: '+37%' },
-      { label: 'Support tickets', value: '-29%' },
-      { label: 'Squads aligned', value: '3' },
-    ],
+      'Owned the booking product for an on-demand home services platform, designing a multi-step booking funnel that matches customers to available providers by location, service type, and schedule.',
+    tags: ['BOOKING FUNNEL', 'LOCATION MATCHING', 'MULTI-STEP UX', 'PROVIDER SUPPLY'],
+    spec: {
+      role: 'Product Owner',
+      overview:
+        'Booking a home service involves several dependent choices — service type, location, and time. I owned the multi-step funnel and the location-matching logic that pairs each booking with an available nearby provider.',
+      highlights: [
+        'Designed the multi-step booking funnel (service → location → schedule → confirm) to reduce drop-off between steps.',
+        'Defined the location-matching logic that pairs bookings with available providers by proximity, service category, and schedule.',
+        'Aligned three squads (booking, provider ops, and payments) around one activation metric for the funnel.',
+        'Ran usability sessions to simplify the steps where users most often abandoned the funnel.',
+      ],
+      stack: ['Multi-step funnel design', 'Location-based matching', 'Provider scheduling'],
+    },
   },
 ]
