@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "framer-motion": "^13.2.0",
+    "js-md5": "^0.9.2",
     "lucide-react": "^1.40.0",
     "qrcode": "^1.5.4",
     "react": "^19.2.8",

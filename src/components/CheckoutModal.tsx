@@ -1,15 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { CheckCircle2, Loader2, X } from 'lucide-react'
+import { CheckCircle2, Loader2, Mail, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import QRCode from 'qrcode'
-import type { Product } from '../data/products'
 import {
-  createOrder,
-  pollOrderStatus,
+  createCheckoutOrder,
+  getOrderStatus,
   triggerDownload,
-  type Order,
+  type CheckoutOrder,
   type OrderStatus,
-} from '../lib/payment'
+} from '../api/checkout'
+import type { Product } from '../data/products'
 
 export function CheckoutModal({
   product,
@@ -18,17 +18,20 @@ export function CheckoutModal({
   product: Product
   onClose: () => void
 }) {
-  const [order, setOrder] = useState<Order | null>(null)
+  const [email, setEmail] = useState('')
+  const [order, setOrder] = useState<CheckoutOrder | null>(null)
   const [status, setStatus] = useState<OrderStatus>('pending')
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null)
   const [secondsLeft, setSecondsLeft] = useState(0)
   const downloadedRef = useRef(false)
 
-  // Create the order and render its KHQR payload as a QR code on open.
+  // Once an email is captured, create the order and render its KHQR
+  // payload as a QR code.
   useEffect(() => {
+    if (!email) return
     let cancelled = false
 
-    createOrder(product).then(async (created) => {
+    createCheckoutOrder(product, email).then(async (created) => {
       if (cancelled) return
       setOrder(created)
       setSecondsLeft(Math.max(0, Math.round((created.expiresAt - Date.now()) / 1000)))
@@ -43,14 +46,14 @@ export function CheckoutModal({
     return () => {
       cancelled = true
     }
-  }, [product])
+  }, [product, email])
 
   // Poll for payment confirmation while the order is pending.
   useEffect(() => {
     if (!order || status !== 'pending') return
 
     const interval = setInterval(async () => {
-      const next = await pollOrderStatus(order.orderId)
+      const next = await getOrderStatus(order.orderId)
       setStatus(next)
     }, 2000)
 
@@ -120,14 +123,17 @@ export function CheckoutModal({
           </div>
 
           <div className="mt-6 flex flex-col items-center gap-4">
-            {status === 'paid' ? (
+            {!email ? (
+              <EmailCaptureForm onSubmit={setEmail} />
+            ) : status === 'paid' ? (
               <div className="flex flex-col items-center gap-3 py-8 text-center">
                 <CheckCircle2 className="text-success" size={40} />
                 <p className="text-sm font-medium text-text">
                   Payment confirmed
                 </p>
                 <p className="max-w-[240px] text-xs text-text-muted">
-                  Your download started automatically.
+                  Your download started automatically, and the link was
+                  emailed to {email}.
                 </p>
                 <button
                   type="button"
@@ -180,8 +186,9 @@ export function CheckoutModal({
                 </div>
 
                 <p className="max-w-[260px] text-center text-xs text-text-muted">
-                  Scan with any Bakong-linked banking app. The file unlocks
-                  automatically once the payment webhook confirms.
+                  Scan with any Bakong-linked banking app. The download link
+                  is emailed to you automatically once the payment webhook
+                  confirms.
                 </p>
               </>
             )}
@@ -189,5 +196,41 @@ export function CheckoutModal({
         </motion.div>
       </motion.div>
     </AnimatePresence>
+  )
+}
+
+function EmailCaptureForm({ onSubmit }: { onSubmit: (email: string) => void }) {
+  const [value, setValue] = useState('')
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (value.trim()) onSubmit(value.trim())
+      }}
+      className="flex w-full flex-col gap-4 py-2"
+    >
+      <p className="text-center text-sm text-text-muted">
+        Where should we send your download link?
+      </p>
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-bg px-3 py-2">
+        <Mail size={16} className="shrink-0 text-text-muted" />
+        <input
+          type="email"
+          required
+          autoFocus
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="you@company.com"
+          className="w-full bg-transparent text-sm text-text placeholder:text-text-muted focus:outline-none"
+        />
+      </div>
+      <button
+        type="submit"
+        className="rounded-lg bg-accent px-4 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-90"
+      >
+        Continue to payment
+      </button>
+    </form>
   )
 }
