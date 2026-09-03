@@ -9,24 +9,22 @@ export function CaseStudies() {
   const [activeStudy, setActiveStudy] = useState<CaseStudy | null>(null)
 
   return (
-    <section id="case-studies" className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-6 py-20">
+    <section id="case-studies" className="border-b border-border px-4 py-20 sm:px-6">
+      <div className="mx-auto max-w-6xl">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={fadeInUpViewport}
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
-          className="mb-12 flex items-end justify-between gap-6"
+          className="mb-12"
         >
-          <div>
-            <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
-              Selected work
-            </span>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-text">
-              Selected Enterprise Case Studies
-            </h2>
-          </div>
+          <span className="font-mono text-xs uppercase tracking-wider text-ink/60">
+            Selected work
+          </span>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink">
+            Selected Enterprise Case Studies
+          </h2>
         </motion.div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -38,38 +36,24 @@ export function CaseStudies() {
               viewport={fadeInUpViewport}
               variants={fadeInUp}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group flex flex-col rounded-xl border border-border bg-surface p-6 transition-colors hover:bg-surface-hover"
+              className="flex flex-col justify-between border border-border bg-surface p-8 text-white transition-colors hover:bg-surface-hover"
             >
-              <span className="inline-block w-fit rounded-md border border-border bg-bg px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-text-muted">
-                {study.category}
-              </span>
-
-              <h3 className="mt-4 text-xl font-semibold text-text">
-                {study.name}
-              </h3>
-              <p className="mt-1 font-mono text-xs text-text-muted">
-                {study.client}
-              </p>
-
-              <p className="mt-4 text-sm leading-relaxed text-text-muted">
-                {study.summary}
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2 border-t border-border pt-4">
-                {study.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-md border border-border bg-bg px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-text-muted"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              <div>
+                <span className="font-mono text-xs uppercase tracking-wider text-crimson">
+                  [{study.code}]
+                </span>
+                <h3 className="mt-4 text-2xl font-bold text-white">
+                  {study.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/60">
+                  {study.oneLiner}
+                </p>
               </div>
 
               <button
                 type="button"
                 onClick={() => setActiveStudy(study)}
-                className="mt-6 inline-flex w-fit items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-text transition-colors hover:text-text-muted"
+                className="mt-8 inline-flex w-fit items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-white transition-colors hover:text-crimson"
               >
                 View spec
                 <ArrowUpRight size={14} />

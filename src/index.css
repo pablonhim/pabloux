@@ -2,16 +2,21 @@
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
 
-  --color-bg: #0b0b0c;
-  --color-surface: #141416;
-  --color-surface-hover: #1a1a1d;
-  --color-border: #222225;
+  /* Stark white canvas — no soft grays as the page background. */
+  --color-bg: #ffffff;
+  /* High-contrast dark cards (case studies, store receipts, overlays). */
+  --color-surface: #0b0b0c;
+  --color-surface-hover: #17171a;
+  --color-border: #262626;
+  /* Primary interactive fill — white, used on dark surfaces. */
   --color-accent: #ffffff;
-  --color-text: #ededed;
-  --color-text-muted: #8a8a8e;
-  --color-success: #22c55e;
+  /* Saturated crimson — headline/brand accent color. */
+  --color-crimson: #d31027;
+  /* Pure-black/charcoal ink for body copy and mono metadata on the white canvas. */
+  --color-ink: #111111;
 
   --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
@@ -29,7 +34,7 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -44,12 +49,13 @@ body {
 
 body {
   background: var(--color-bg);
-  color: var(--color-text);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 #root {
@@ -57,6 +63,6 @@ body {
 }
 
 ::selection {
-  background: var(--color-accent);
+  background: var(--color-crimson);
   color: var(--color-bg);
 }
