@@ -1,29 +1,38 @@
 import { motion } from 'framer-motion'
 import { caseStudies } from '../data/caseStudies'
+import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 
 export function CaseStudies() {
   return (
     <section id="case-studies" className="border-t border-border">
       <div className="mx-auto max-w-6xl px-6 py-20">
-        <div className="mb-12 flex items-end justify-between gap-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={fadeInUpViewport}
+          variants={fadeInUp}
+          transition={{ duration: 0.5 }}
+          className="mb-12 flex items-end justify-between gap-6"
+        >
           <div>
             <span className="font-mono text-xs uppercase tracking-wider text-text-muted">
               Selected work
             </span>
             <h2 className="mt-2 text-3xl font-semibold tracking-tight text-text">
-              Case studies
+              Selected Enterprise Case Studies
             </h2>
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {caseStudies.map((study, i) => (
             <motion.article
               key={study.id}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={fadeInUpViewport}
+              variants={fadeInUp}
+              transition={{ duration: 0.5, delay: i * 0.05 }}
               className="group rounded-xl border border-border bg-surface p-6 transition-colors hover:bg-surface-hover"
             >
               <span className="inline-block rounded-md border border-border bg-bg px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-text-muted">

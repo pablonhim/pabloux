@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CaseStudies } from './components/CaseStudies'
 import { CheckoutModal } from './components/CheckoutModal'
+import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
@@ -16,6 +17,7 @@ function App() {
       <Hero />
       <CaseStudies />
       <Store onBuy={setCheckoutProduct} />
+      <Contact />
       <Footer />
 
       {checkoutProduct && (

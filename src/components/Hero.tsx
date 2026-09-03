@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 import { StatusBadge } from './StatusBadge'
 
 export function Hero() {
@@ -9,16 +10,20 @@ export function Hero() {
       className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 pb-20 pt-24 sm:pt-32"
     >
       <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={fadeInUpViewport}
+        variants={fadeInUp}
+        transition={{ duration: 0.5 }}
       >
         <StatusBadge />
       </motion.div>
 
       <motion.h1
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={fadeInUpViewport}
+        variants={fadeInUp}
         transition={{ duration: 0.5, delay: 0.05 }}
         className="max-w-3xl text-4xl font-semibold tracking-tight text-text sm:text-6xl"
       >
@@ -27,8 +32,10 @@ export function Hero() {
       </motion.h1>
 
       <motion.p
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={fadeInUpViewport}
+        variants={fadeInUp}
         transition={{ duration: 0.5, delay: 0.1 }}
         className="max-w-2xl text-lg text-text-muted"
       >
@@ -38,8 +45,10 @@ export function Hero() {
       </motion.p>
 
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={fadeInUpViewport}
+        variants={fadeInUp}
         transition={{ duration: 0.5, delay: 0.15 }}
         className="flex flex-wrap items-center gap-3 pt-2"
       >

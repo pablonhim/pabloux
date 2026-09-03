@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import type { Product } from '../data/products'
+import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 
 export function TicketCard({
   product,
@@ -10,10 +11,11 @@ export function TicketCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.4 }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={fadeInUpViewport}
+      variants={fadeInUp}
+      transition={{ duration: 0.5 }}
       className="flex overflow-hidden rounded-xl border border-border bg-surface"
     >
       {/* Main stub */}
