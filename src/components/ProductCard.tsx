@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
+import { useRef } from 'react'
 import type { Product } from '../data/products'
-import { flyRotateIn, flyRotateViewport } from '../lib/motion'
+import { useFlyRotateScroll } from '../lib/motion'
 import { ProductIcon } from '../lib/productIcon'
 
 const NOTCH = 16
@@ -18,14 +19,16 @@ export function ProductCard({
   onBuy: (product: Product) => void
   onPreview: (product: Product) => void
 }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { y, rotate, opacity, scale } = useFlyRotateScroll(
+    ref,
+    index % 2 === 0 ? -1 : 1,
+  )
+
   return (
     <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={flyRotateViewport}
-      variants={flyRotateIn(index % 2 === 0 ? -1 : 1)}
-      transition={{ type: 'spring', stiffness: 90, damping: 14, delay: index * 0.08 }}
-      style={{ clipPath: notchClipPath }}
+      ref={ref}
+      style={{ clipPath: notchClipPath, y, rotate, opacity, scale }}
       className="flex flex-col justify-between bg-ink text-paper"
     >
       <button
