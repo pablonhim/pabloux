@@ -10,6 +10,8 @@ import {
   type OrderStatus,
 } from '../api/checkout'
 import type { Product } from '../data/products'
+import { usePick } from '../i18n/LanguageContext'
+import { useStrings } from '../i18n/strings'
 
 export function CheckoutModal({
   product,
@@ -18,6 +20,8 @@ export function CheckoutModal({
   product: Product
   onClose: () => void
 }) {
+  const pick = usePick()
+  const t = useStrings()
   const [email, setEmail] = useState('')
   const [order, setOrder] = useState<CheckoutOrder | null>(null)
   const [status, setStatus] = useState<OrderStatus>('pending')
@@ -106,16 +110,16 @@ export function CheckoutModal({
           <div className="flex items-start justify-between">
             <div>
               <span className="font-sans text-[11px] uppercase tracking-wider text-paper/50">
-                Pay with Bakong KHQR
+                {t.checkout.payWith}
               </span>
               <h3 className="mt-1 font-davinci text-xl text-paper">
-                {product.name}
+                {pick(product.name)}
               </h3>
             </div>
             <button
               type="button"
               onClick={onClose}
-              aria-label="Close checkout"
+              aria-label={t.checkout.closeAria}
               className="text-paper/60 transition-colors hover:text-paper"
             >
               <X size={18} />
@@ -129,39 +133,38 @@ export function CheckoutModal({
               <div className="flex flex-col items-center gap-3 py-8 text-center">
                 <CheckCircle2 className="text-paper" size={40} />
                 <p className="text-sm font-medium text-paper">
-                  Payment confirmed
+                  {t.checkout.paymentConfirmed}
                 </p>
                 <p className="max-w-[240px] text-xs text-paper/60">
-                  Your download started automatically, and the link was
-                  emailed to {email}.
+                  {t.checkout.downloadStarted(email)}
                 </p>
                 <button
                   type="button"
                   onClick={() => triggerDownload(product.fileName, product)}
                   className="mt-2 rounded-[28.8px] border border-graphite px-[17px] py-[9px] font-sans text-xs text-paper transition-colors hover:border-paper"
                 >
-                  Download again
+                  {t.checkout.downloadAgain}
                 </button>
               </div>
             ) : status === 'expired' ? (
               <div className="flex flex-col items-center gap-3 py-8 text-center">
-                <p className="text-sm font-medium text-paper">QR expired</p>
+                <p className="text-sm font-medium text-paper">{t.checkout.qrExpired}</p>
                 <p className="max-w-[240px] text-xs text-paper/60">
-                  This payment window closed. Reopen checkout to try again.
+                  {t.checkout.windowClosed}
                 </p>
                 <button
                   type="button"
                   onClick={onClose}
                   className="mt-2 rounded-[28.8px] bg-paper px-[17px] py-[9px] font-sans text-xs text-ink"
                 >
-                  Close
+                  {t.checkout.close}
                 </button>
               </div>
             ) : (
               <>
                 <div className="rounded-[9px] bg-paper p-3">
                   {qrDataUrl ? (
-                    <img src={qrDataUrl} alt="Bakong KHQR payment code" width={200} height={200} />
+                    <img src={qrDataUrl} alt={t.checkout.qrAlt} width={200} height={200} />
                   ) : (
                     <div className="flex h-[200px] w-[200px] items-center justify-center">
                       <Loader2 className="animate-spin text-ink" size={24} />
@@ -174,21 +177,19 @@ export function CheckoutModal({
                     ${product.priceUsd.toFixed(2)}
                   </p>
                   <p className="mt-1 font-sans text-xs text-paper/50">
-                    Order {order?.orderId ?? '—'}
+                    {t.checkout.order(order?.orderId ?? '—')}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2 rounded-[28.8px] border border-graphite px-4 py-1.5">
                   <Loader2 className="animate-spin text-paper/60" size={14} />
                   <span className="font-sans text-xs uppercase tracking-wider text-paper/60">
-                    Waiting for payment · expires in {mm}:{ss}
+                    {t.checkout.waitingForPayment(mm, ss)}
                   </span>
                 </div>
 
                 <p className="max-w-[260px] text-center text-xs text-paper/60">
-                  Scan with any Bakong-linked banking app. The download link
-                  is emailed to you automatically once the payment webhook
-                  confirms.
+                  {t.checkout.scanInstructions}
                 </p>
               </>
             )}
@@ -200,6 +201,7 @@ export function CheckoutModal({
 }
 
 function EmailCaptureForm({ onSubmit }: { onSubmit: (email: string) => void }) {
+  const t = useStrings()
   const [value, setValue] = useState('')
 
   return (
@@ -211,7 +213,7 @@ function EmailCaptureForm({ onSubmit }: { onSubmit: (email: string) => void }) {
       className="flex w-full flex-col gap-4 py-2"
     >
       <p className="text-center text-sm text-paper/60">
-        Where should we send your download link?
+        {t.checkout.emailPrompt}
       </p>
       <div className="flex items-center gap-2 rounded-[9px] border border-graphite bg-ink px-3 py-2">
         <Mail size={16} className="shrink-0 text-paper/60" />
@@ -221,7 +223,7 @@ function EmailCaptureForm({ onSubmit }: { onSubmit: (email: string) => void }) {
           autoFocus
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="you@company.com"
+          placeholder={t.checkout.emailPlaceholder}
           className="w-full bg-transparent text-sm text-paper placeholder:text-paper/40 focus:outline-none"
         />
       </div>
@@ -229,7 +231,7 @@ function EmailCaptureForm({ onSubmit }: { onSubmit: (email: string) => void }) {
         type="submit"
         className="rounded-[28.8px] bg-paper px-[17px] py-[9px] font-sans text-xs text-ink transition-opacity hover:opacity-80"
       >
-        Continue to payment
+        {t.checkout.continueToPayment}
       </button>
     </form>
   )

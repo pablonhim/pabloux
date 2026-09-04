@@ -38,6 +38,18 @@
   color-scheme: light;
 }
 
+/* Khmer type system — swaps the two Latin faces for Khmer-script faces.
+   Toggled by LanguageProvider setting <html lang="km">. Since these are
+   the same custom-property names Tailwind's font-sans/font-davinci
+   utilities read at runtime, every component re-themes automatically —
+   no component-level font classes need to change per language. */
+:root[lang='km'] {
+  --font-davinci: 'Odor Mean Chey', 'Noto Serif Khmer', 'Playfair Display', serif;
+  --font-helvetica-now: 'Kantumruy Pro', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Kantumruy Pro', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Noto Serif Khmer', 'Odor Mean Chey', 'Playfair Display', serif;
+}
+
 * {
   box-sizing: border-box;
 }

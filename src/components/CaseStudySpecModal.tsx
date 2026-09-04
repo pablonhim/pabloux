@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import type { CaseStudy } from '../data/caseStudies'
+import { usePick } from '../i18n/LanguageContext'
+import { useStrings } from '../i18n/strings'
 
 export function CaseStudySpecModal({
   study,
@@ -9,6 +11,9 @@ export function CaseStudySpecModal({
   study: CaseStudy
   onClose: () => void
 }) {
+  const pick = usePick()
+  const t = useStrings()
+
   return (
     <AnimatePresence>
       <motion.div
@@ -32,13 +37,13 @@ export function CaseStudySpecModal({
                 {study.code}
               </span>
               <h3 className="mt-3 font-davinci text-2xl text-paper">
-                {study.name}
+                {pick(study.name)}
               </h3>
             </div>
             <button
               type="button"
               onClick={onClose}
-              aria-label="Close spec"
+              aria-label={t.specModal.closeAria}
               className="shrink-0 font-sans text-xs text-paper/60 underline-offset-4 transition-[text-decoration] hover:underline"
             >
               <X size={18} />
@@ -47,26 +52,26 @@ export function CaseStudySpecModal({
 
           <div className="mt-6 border-t border-graphite pt-6">
             <span className="font-sans text-[11px] uppercase tracking-wider text-paper/50">
-              Role
+              {t.specModal.role}
             </span>
-            <p className="mt-1 text-sm text-paper">{study.spec.role}</p>
+            <p className="mt-1 text-sm text-paper">{pick(study.spec.role)}</p>
           </div>
 
           <div className="mt-6">
             <span className="font-sans text-[11px] uppercase tracking-wider text-paper/50">
-              Overview
+              {t.specModal.overview}
             </span>
             <p className="mt-2 text-sm leading-relaxed text-paper/70">
-              {study.spec.overview}
+              {pick(study.spec.overview)}
             </p>
           </div>
 
           <div className="mt-6">
             <span className="font-sans text-[11px] uppercase tracking-wider text-paper/50">
-              Highlights
+              {t.specModal.highlights}
             </span>
             <ul className="mt-2 space-y-2">
-              {study.spec.highlights.map((highlight) => (
+              {pick(study.spec.highlights).map((highlight) => (
                 <li
                   key={highlight}
                   className="flex gap-2 text-sm leading-relaxed text-paper/70"
@@ -79,7 +84,7 @@ export function CaseStudySpecModal({
           </div>
 
           <div className="mt-6 flex flex-wrap gap-2 border-t border-graphite pt-6">
-            {study.spec.stack.map((item) => (
+            {pick(study.spec.stack).map((item) => (
               <span
                 key={item}
                 className="rounded-[2px] border border-graphite px-2 py-1 font-sans text-[11px] text-paper"

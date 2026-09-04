@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import type { CaseStudy } from '../data/caseStudies'
+import { usePick } from '../i18n/LanguageContext'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 import { Hexagon } from './Hexagon'
 
@@ -12,6 +13,8 @@ export function GalleryCard({
   index: number
   onOpen: (study: CaseStudy) => void
 }) {
+  const pick = usePick()
+
   return (
     <motion.button
       type="button"
@@ -24,7 +27,7 @@ export function GalleryCard({
       className="group flex flex-col items-center text-center"
     >
       <span className="font-davinci text-xl text-paper" style={{ letterSpacing: '-0.01em' }}>
-        {study.name}
+        {pick(study.name)}
       </span>
 
       <span className="mt-5 aspect-square w-full max-w-[200px] rounded-full bg-ash transition-opacity duration-300 group-hover:opacity-80" />

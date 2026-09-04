@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, X } from 'lucide-react'
 import type { Product } from '../data/products'
+import { usePick } from '../i18n/LanguageContext'
+import { useStrings } from '../i18n/strings'
 import { ProductIcon } from '../lib/productIcon'
 
 export function PreviewModal({
@@ -12,6 +14,9 @@ export function PreviewModal({
   onClose: () => void
   onBuy: (product: Product) => void
 }) {
+  const pick = usePick()
+  const t = useStrings()
+
   return (
     <AnimatePresence>
       <motion.div
@@ -40,13 +45,13 @@ export function PreviewModal({
                   {product.code}
                 </span>
                 <h3 className="mt-2 font-davinci text-2xl text-paper">
-                  {product.name}
+                  {pick(product.name)}
                 </h3>
               </div>
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Close preview"
+                aria-label={t.previewModal.closeAria}
                 className="shrink-0 text-paper/60 transition-colors hover:text-paper"
               >
                 <X size={18} />
@@ -54,11 +59,11 @@ export function PreviewModal({
             </div>
 
             <p className="mt-3 text-sm leading-relaxed text-paper/70">
-              {product.description}
+              {pick(product.description)}
             </p>
 
             <ul className="mt-5 space-y-2">
-              {product.highlights.map((item) => (
+              {pick(product.highlights).map((item) => (
                 <li
                   key={item}
                   className="flex items-start gap-2 text-sm text-paper/70"
@@ -83,7 +88,7 @@ export function PreviewModal({
                 onClick={() => onBuy(product)}
                 className="rounded-[28.8px] bg-paper px-[17px] py-[9px] font-sans text-xs text-ink transition-opacity hover:opacity-80"
               >
-                Buy
+                {t.previewModal.buy}
               </button>
             </div>
           </div>

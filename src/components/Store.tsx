@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { products, type Product } from '../data/products'
+import { useStrings } from '../i18n/strings'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 import { ProductCard } from './ProductCard'
 
@@ -10,6 +11,8 @@ export function Store({
   onBuy: (product: Product) => void
   onPreview: (product: Product) => void
 }) {
+  const t = useStrings()
+
   return (
     <section id="store" className="bg-bone px-6 py-24 sm:px-10">
       <div className="mx-auto max-w-5xl">
@@ -22,17 +25,16 @@ export function Store({
           className="mb-16 text-center"
         >
           <span className="font-sans text-xs uppercase tracking-widest text-graphite">
-            Digital asset store
+            {t.store.eyebrow}
           </span>
           <h2
             className="mt-3 font-davinci text-ink"
             style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', letterSpacing: '-0.02em' }}
           >
-            Take the playbooks with you
+            {t.store.heading}
           </h2>
           <p className="mx-auto mt-4 max-w-md text-sm text-graphite">
-            Pay with Bakong KHQR — the file unlocks automatically once
-            payment is confirmed.
+            {t.store.sub}
           </p>
         </motion.div>
 

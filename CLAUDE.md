@@ -90,8 +90,8 @@ edge-to-edge, only inner content clusters get a max-width. Order:
    "PDF + Sheets" — never a fabricated screenshot), two "what's inside"
    highlight bullets, a Preview button (opens `PreviewModal.tsx` — full
    highlights list + Buy), and a Paper pill Buy button wired to the Bakong
-   KHQR modal. Cards fly and rotate in from below on scroll
-   (`flyRotateIn`/`flyRotateViewport`, `src/lib/motion.ts`), alternating
+   KHQR modal. Cards fly and rotate in from below, scrubbed directly to
+   scroll position (`useFlyRotateScroll`, `src/lib/motion.ts`), alternating
    rotation direction left/right per card.
 5. **Process** — Putty canvas, 4 steps, `font-davinci` numbers, hexagon
    connectors between steps at the `lg` breakpoint.
@@ -124,6 +124,40 @@ backend, not the browser) — the frontend only polls an internal status
 endpoint. See `api/README.md` for the integration contract and what is
 stubbed (`src/api/checkout.ts`, `DEMO_MODE`) vs. production-ready.
 
+### Localization (Khmer / English)
+
+The site is bilingual, **Khmer by default**, switchable to English via the
+KM / EN toggle in the header.
+
+- **`src/i18n/LanguageContext.tsx`** — `LanguageProvider` (wraps `<App />`
+  in `main.tsx`) holds the active `Language` (`'km' | 'en'`), persists it to
+  `localStorage` (`pablo-ux-language`), and sets `document.documentElement.lang`.
+  `useLanguage()` reads/sets it; `usePick()` returns a helper that picks the
+  current-language value out of a `{ en, km }` field.
+- **`src/i18n/strings.ts`** — the single source of truth for every UI
+  string (nav, buttons, section copy, checkout flow). `useStrings()`
+  returns the active dictionary. Add new UI copy here, never inline.
+- **`src/i18n/types.ts`** — `Bilingual<T = string>` (`{ en: T; km: T }`) is
+  the convention for any bilingual data field.
+- **Data files** (`src/data/caseStudies.ts`, `products.ts`, `faq.ts`) use
+  `Bilingual`/`Bilingual<string[]>` for real content fields (names,
+  descriptions, highlights). IDs, codes, file names, and prices stay plain
+  strings/numbers — they're not language-dependent.
+- **The "Pablo UX" brand name is never translated** — it stays as-is in
+  both languages, same as any wordmark.
+- **Font swap is CSS-only:** `:root[lang='km']` in `src/index.css`
+  overrides the `--font-davinci`/`--font-sans` custom properties to
+  Khmer-aware stacks (**Kantumruy Pro** for body/grotesk duty, **Odor Mean
+  Chey** with **Noto Serif Khmer** fallback for display/heading duty).
+  Because Tailwind v4's `--font-*` tokens are live CSS variables, this
+  reskins every `font-davinci`/`font-sans` component with zero
+  component-level changes — only content needs per-component wiring via
+  `usePick()`/`useStrings()`.
+- When adding a new section or component with user-facing text: add the
+  strings to both `en` and `km` in `strings.ts` first, then consume via
+  `useStrings()`/`usePick()` — never hardcode English (or any language)
+  directly in a component.
+
 ## Code conventions
 
 - React + TypeScript, function components only, no class components.
@@ -133,8 +167,9 @@ stubbed (`src/api/checkout.ts`, `DEMO_MODE`) vs. production-ready.
 - Framer Motion for animation/transitions; keep it to the shared
   `fadeInUp`/`fadeInUpViewport` scroll-in variant (`src/lib/motion.ts`) —
   this system's drama is typographic, not motion-driven, everywhere except
-  the Digital Asset Store (see above), which uses `flyRotateIn` instead.
-  Don't add 3D tilt, parallax, or scroll-jacking anywhere, including the
-  Store — its motion is a 2D fly/rotate/scale entrance, not a gimmick.
+  the Digital Asset Store (see above), which uses `useFlyRotateScroll`
+  instead. Don't add 3D tilt, parallax, or scroll-jacking anywhere,
+  including the Store — its motion is a 2D fly/rotate/scale entrance
+  scrubbed to scroll position, not a gimmick.
 - Keep mock/demo content clearly separated in `src/data/` so it's obvious
   what's placeholder content vs. real copy.

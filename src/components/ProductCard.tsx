@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
 import { useRef } from 'react'
 import type { Product } from '../data/products'
+import { usePick } from '../i18n/LanguageContext'
+import { useStrings } from '../i18n/strings'
 import { useFlyRotateScroll } from '../lib/motion'
 import { ProductIcon } from '../lib/productIcon'
 
@@ -24,6 +26,9 @@ export function ProductCard({
     ref,
     index % 2 === 0 ? -1 : 1,
   )
+  const pick = usePick()
+  const t = useStrings()
+  const name = pick(product.name)
 
   return (
     <motion.div
@@ -34,7 +39,7 @@ export function ProductCard({
       <button
         type="button"
         onClick={() => onPreview(product)}
-        aria-label={`Preview ${product.name}`}
+        aria-label={name}
         className="flex aspect-[16/10] w-full items-center justify-center bg-ash transition-opacity hover:opacity-90"
       >
         <ProductIcon format={product.format} size={40} className="text-paper" />
@@ -45,23 +50,23 @@ export function ProductCard({
           <span className="font-sans text-[11px] uppercase tracking-wider text-paper/50">
             {product.code}
           </span>
-          <h3 className="mt-3 font-davinci text-2xl text-paper">
-            {product.name}
-          </h3>
+          <h3 className="mt-3 font-davinci text-2xl text-paper">{name}</h3>
           <p className="mt-2 text-sm leading-relaxed text-paper/70">
-            {product.description}
+            {pick(product.description)}
           </p>
 
           <ul className="mt-4 space-y-1.5">
-            {product.highlights.slice(0, 2).map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-2 text-xs text-paper/60"
-              >
-                <Check size={12} className="mt-0.5 shrink-0 text-paper/40" />
-                {item}
-              </li>
-            ))}
+            {pick(product.highlights)
+              .slice(0, 2)
+              .map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2 text-xs text-paper/60"
+                >
+                  <Check size={12} className="mt-0.5 shrink-0 text-paper/40" />
+                  {item}
+                </li>
+              ))}
           </ul>
         </div>
 
@@ -80,14 +85,14 @@ export function ProductCard({
               onClick={() => onPreview(product)}
               className="rounded-[28.8px] border border-graphite px-[17px] py-[9px] font-sans text-xs text-paper transition-colors hover:border-paper"
             >
-              Preview
+              {t.store.preview}
             </button>
             <button
               type="button"
               onClick={() => onBuy(product)}
               className="rounded-[28.8px] bg-paper px-[17px] py-[9px] font-sans text-xs text-ink transition-opacity hover:opacity-80"
             >
-              Buy
+              {t.store.buy}
             </button>
           </div>
         </div>
