@@ -1,47 +1,56 @@
-const navLinks = [
-  { label: 'Case Studies', href: '#case-studies' },
-  { label: 'Digital Store', href: '#store' },
-  { label: 'Process', href: '#process' },
-  { label: 'Contact', href: '#contact' },
-]
+import { useLanguage } from '../i18n/LanguageContext'
+import { useStrings } from '../i18n/strings'
 
 export function Header() {
-  return (
-    <header>
-      <div className="overflow-hidden px-2">
-        <h1
-          className="select-none whitespace-nowrap font-sans font-black uppercase leading-none text-crimson"
-          style={{
-            fontSize: 'clamp(2.75rem, 14vw, 18rem)',
-            letterSpacing: '-0.03em',
-          }}
-        >
-          Chanborey
-        </h1>
-      </div>
+  const { language, setLanguage } = useLanguage()
+  const t = useStrings()
 
-      <nav className="grid grid-cols-1 items-center gap-3 border-y border-border px-4 py-3 sm:grid-cols-3 sm:px-6">
-        <span className="font-mono text-xs uppercase tracking-wider text-ink">
-          Senior Product Lead &amp; AI Architect
-        </span>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-wider text-ink sm:justify-center">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-crimson"
-            >
-              {link.label}
-            </a>
-          ))}
+  return (
+    <header className="flex items-center justify-between px-6 py-3 sm:px-10">
+      <a
+        href="#top"
+        aria-label={t.header.homeAria}
+        className="flex h-8 w-8 items-center justify-center rounded-full border border-ink font-davinci text-sm text-ink"
+      >
+        P
+      </a>
+
+      <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1.5 font-sans text-xs text-ink">
+          <button
+            type="button"
+            onClick={() => setLanguage('km')}
+            aria-current={language === 'km'}
+            className={
+              language === 'km'
+                ? 'font-medium'
+                : 'text-ink/50 underline-offset-4 hover:underline'
+            }
+          >
+            {t.languageSwitcher.km}
+          </button>
+          <span className="text-ink/30">/</span>
+          <button
+            type="button"
+            onClick={() => setLanguage('en')}
+            aria-current={language === 'en'}
+            className={
+              language === 'en'
+                ? 'font-medium'
+                : 'text-ink/50 underline-offset-4 hover:underline'
+            }
+          >
+            {t.languageSwitcher.en}
+          </button>
         </div>
+
         <a
-          href="mailto:nhimchanborey@gmail.com"
-          className="font-mono text-xs uppercase tracking-wider text-ink transition-colors hover:text-crimson sm:justify-self-end"
+          href="#contact"
+          className="font-sans text-xs text-ink underline-offset-4 transition-[text-decoration] hover:underline"
         >
-          nhimchanborey@gmail.com
+          {t.header.brandLink}
         </a>
-      </nav>
+      </div>
     </header>
   )
 }

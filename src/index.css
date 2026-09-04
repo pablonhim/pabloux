@@ -1,40 +1,53 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  /* Davinci substitute — display/heading serif, the brand voice. Display-only. */
+  --font-davinci: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  /* Helvetica Now substitute — utility grotesk for everything functional. */
+  --font-helvetica-now: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  /* Alias kept for components still using the generic Tailwind names. */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
-  /* Stark white canvas — no soft grays as the page background. */
-  --color-bg: #ffffff;
-  /* High-contrast dark cards (case studies, store receipts, overlays). */
-  --color-surface: #0b0b0c;
-  --color-surface-hover: #17171a;
-  --color-border: #262626;
-  /* Primary interactive fill — white, used on dark surfaces. */
-  --color-accent: #ffffff;
-  /* Saturated crimson — headline/brand accent color. */
-  --color-crimson: #d31027;
-  /* Pure-black/charcoal ink for body copy and mono metadata on the white canvas. */
-  --color-ink: #111111;
+  --color-putty: #c4c3b6;
+  --color-ink: #000000;
+  --color-bone: #e7e5e4;
+  --color-chalk: #ebebeb;
+  --color-vellum: #dfdcd5;
+  --color-graphite: #595855;
+  --color-ash: #808080;
+  --color-paper: #ffffff;
 
-  --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --radius-card: 9px;
+  --radius-link: 2px;
+  --radius-pill: 28.8px;
 
-  @keyframes pulse-ring {
-    0%,
-    100% {
-      opacity: 1;
-      transform: scale(1);
+  --animate-marquee: marquee 22s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
     }
-    50% {
-      opacity: 0.4;
-      transform: scale(1.6);
+    to {
+      transform: translateX(-50%);
     }
   }
 }
 
 :root {
   color-scheme: light;
+}
+
+/* Khmer type system — swaps the two Latin faces for Khmer-script faces.
+   Toggled by LanguageProvider setting <html lang="km">. Since these are
+   the same custom-property names Tailwind's font-sans/font-davinci
+   utilities read at runtime, every component re-themes automatically —
+   no component-level font classes need to change per language. */
+:root[lang='km'] {
+  --font-davinci: 'Odor Mean Chey', 'Noto Serif Khmer', 'Playfair Display', serif;
+  --font-helvetica-now: 'Kantumruy Pro', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Kantumruy Pro', 'Noto Sans Khmer', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Noto Serif Khmer', 'Odor Mean Chey', 'Playfair Display', serif;
 }
 
 * {
@@ -48,9 +61,9 @@ body {
 }
 
 body {
-  background: var(--color-bg);
+  background: var(--color-putty);
   color: var(--color-ink);
-  font-family: var(--font-sans);
+  font-family: var(--font-helvetica-now);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -63,6 +76,6 @@ body {
 }
 
 ::selection {
-  background: var(--color-crimson);
-  color: var(--color-bg);
+  background: var(--color-ink);
+  color: var(--color-paper);
 }
