@@ -3,7 +3,13 @@ import { products, type Product } from '../data/products'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 import { ProductCard } from './ProductCard'
 
-export function Store({ onBuy }: { onBuy: (product: Product) => void }) {
+export function Store({
+  onBuy,
+  onPreview,
+}: {
+  onBuy: (product: Product) => void
+  onPreview: (product: Product) => void
+}) {
   return (
     <section id="store" className="bg-bone px-6 py-24 sm:px-10">
       <div className="mx-auto max-w-5xl">
@@ -30,9 +36,15 @@ export function Store({ onBuy }: { onBuy: (product: Product) => void }) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} onBuy={onBuy} />
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          {products.map((product, i) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              index={i}
+              onBuy={onBuy}
+              onPreview={onPreview}
+            />
           ))}
         </div>
       </div>

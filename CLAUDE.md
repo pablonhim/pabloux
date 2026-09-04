@@ -81,10 +81,18 @@ edge-to-edge, only inner content clusters get a max-width. Order:
    licensed image once available, never a fabricated graphic) with a serif
    caption above and a small hexagon indicator below. Click opens the spec
    modal (also Ink/Paper).
-4. **Digital Asset Store** — **Bone** canvas. Products as notched Ink cards
-   (`clip-path` corner cuts, not `border-radius` — see `ProductCard.tsx`
-   for the exact polygon), Paper pill checkout button, wired to the Bakong
-   KHQR modal.
+4. **Digital Asset Store** — **Bone** canvas. This section is the site's
+   one deliberate exception to restrained motion (see Code conventions) —
+   it's the conversion moment, so it's allowed to be more physical. Each
+   product is a notched Ink card (`clip-path` corner cuts, not
+   `border-radius` — see `ProductCard.tsx` for the exact polygon) with:
+   a flat `--ash` thumbnail (a format-relevant icon, e.g. a sheet icon for
+   "PDF + Sheets" — never a fabricated screenshot), two "what's inside"
+   highlight bullets, a Preview button (opens `PreviewModal.tsx` — full
+   highlights list + Buy), and a Paper pill Buy button wired to the Bakong
+   KHQR modal. Cards fly and rotate in from below on scroll
+   (`flyRotateIn`/`flyRotateViewport`, `src/lib/motion.ts`), alternating
+   rotation direction left/right per card.
 5. **Process** — Putty canvas, 4 steps, `font-davinci` numbers, hexagon
    connectors between steps at the `lg` breakpoint.
 6. **FAQ ("Notes")** — **Chalk** canvas. Plain wall-label treatment: serif
@@ -124,7 +132,9 @@ stubbed (`src/api/checkout.ts`, `DEMO_MODE`) vs. production-ready.
   necessary.
 - Framer Motion for animation/transitions; keep it to the shared
   `fadeInUp`/`fadeInUpViewport` scroll-in variant (`src/lib/motion.ts`) —
-  this system's drama is typographic, not motion-driven. No 3D tilt, no
-  parallax, no scroll-jacking.
+  this system's drama is typographic, not motion-driven, everywhere except
+  the Digital Asset Store (see above), which uses `flyRotateIn` instead.
+  Don't add 3D tilt, parallax, or scroll-jacking anywhere, including the
+  Store — its motion is a 2D fly/rotate/scale entrance, not a gimmick.
 - Keep mock/demo content clearly separated in `src/data/` so it's obvious
   what's placeholder content vs. real copy.

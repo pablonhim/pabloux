@@ -9,3 +9,16 @@ export const fadeInUp: Variants = {
 }
 
 export const fadeInUpViewport = { once: true, margin: '-80px' }
+
+// The one deliberate exception to "restrained motion": the Digital Asset
+// Store cards fly and rotate in from below as they enter the viewport.
+// Alternate the rotation direction by index (see productFlyIn) so the grid
+// doesn't feel mechanically repetitive.
+export function flyRotateIn(direction: 1 | -1): Variants {
+  return {
+    hidden: { opacity: 0, y: 140, rotate: 8 * direction, scale: 0.94 },
+    visible: { opacity: 1, y: 0, rotate: 0, scale: 1 },
+  }
+}
+
+export const flyRotateViewport = { once: true, margin: '-120px', amount: 0.3 }
