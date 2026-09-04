@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
+import { Hexagon } from './Hexagon'
 
 const steps = [
   {
@@ -27,34 +27,28 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="process" className="border-b border-border px-4 py-20 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+    <section id="process" className="bg-putty px-6 py-24 sm:px-10">
+      <div className="mx-auto max-w-5xl">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={fadeInUpViewport}
           variants={fadeInUp}
           transition={{ duration: 0.5 }}
-          className="mb-12"
+          className="mb-16 text-center"
         >
-          <span className="font-mono text-xs uppercase tracking-wider text-ink/60">
+          <span className="font-sans text-xs uppercase tracking-widest text-graphite">
             How I work
           </span>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink">
+          <h2
+            className="mt-3 font-davinci text-ink"
+            style={{ fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', letterSpacing: '-0.02em' }}
+          >
             Process
           </h2>
         </motion.div>
 
-        <div className="relative grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.slice(0, -1).map((_, i) => (
-            <ArrowRight
-              key={i}
-              size={16}
-              className="absolute top-0 hidden -translate-x-1/2 -translate-y-1/2 text-electric lg:block"
-              style={{ left: `${((i + 1) / steps.length) * 100}%` }}
-            />
-          ))}
-
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((step, i) => (
             <motion.div
               key={step.n}
@@ -63,13 +57,18 @@ export function Process() {
               viewport={fadeInUpViewport}
               variants={fadeInUp}
               transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="border-t border-border pt-4"
+              className="flex flex-col items-center border-t border-vellum pt-6 text-center lg:items-start lg:text-left"
             >
-              <span className="font-mono text-sm text-electric">{step.n}</span>
-              <h3 className="mt-2 text-lg font-bold text-ink">{step.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink/70">
+              <span className="font-davinci text-2xl text-ink">{step.n}</span>
+              <h3 className="mt-2 font-davinci text-lg text-ink">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-graphite">
                 {step.copy}
               </p>
+              {i < steps.length - 1 && (
+                <Hexagon size={12} className="mt-6 hidden text-ink lg:block" />
+              )}
             </motion.div>
           ))}
         </div>

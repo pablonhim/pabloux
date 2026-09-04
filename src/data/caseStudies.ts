@@ -1,5 +1,3 @@
-import type { CoverVariant } from '../components/CoverArt'
-
 export interface CaseStudySpec {
   role: string
   overview: string
@@ -9,12 +7,10 @@ export interface CaseStudySpec {
 
 export interface CaseStudy {
   id: string
-  /** Monospace ID tag, e.g. "PKG/FIN.01" */
+  /** ID tag, e.g. "PKG/FIN.01" */
   code: string
   name: string
   oneLiner: string
-  /** Generative placeholder cover art motif — swap for real project imagery when available. */
-  coverVariant: CoverVariant
   spec: CaseStudySpec
 }
 
@@ -23,7 +19,6 @@ export const caseStudies: CaseStudy[] = [
     id: 'b2b-multi-bank',
     code: 'PKG/FIN.01',
     name: 'Enterprise B2B Multi-Bank Platform',
-    coverVariant: 'grid',
     oneLiner:
       'Inquire balances across 18 Cambodian banks from one dashboard, governed by a full RBAC permissions matrix.',
     spec: {
@@ -43,7 +38,6 @@ export const caseStudies: CaseStudy[] = [
     id: 'oto-delivery',
     code: 'PKG/LOG.02',
     name: 'OTO Delivery — Multi-Pin Routing',
-    coverVariant: 'route',
     oneLiner:
       'Multi-pin location drop-offs and a driver HUD UX for real-time last-mile routing decisions.',
     spec: {
@@ -63,7 +57,6 @@ export const caseStudies: CaseStudy[] = [
     id: 'plasfooddou',
     code: 'PKG/ECO.03',
     name: 'PlasFoodDou Eco-Rewards',
-    coverVariant: 'rings',
     oneLiner:
       'QR-scan eco-rewards for reusable packaging, backed by merchant POS integrations at checkout.',
     spec: {
@@ -83,7 +76,6 @@ export const caseStudies: CaseStudy[] = [
     id: 'home-service',
     code: 'PKG/SVC.04',
     name: 'Home Service Booking Platform',
-    coverVariant: 'blocks',
     oneLiner:
       'On-demand technician booking funnel matching customers to providers by location, service, and schedule.',
     spec: {

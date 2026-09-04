@@ -10,155 +10,111 @@ strictly for any UI, copy, or content changes.
 - **Person behind it:** Nhim Chanborey — Product & UX Design Studio
 - Voice: confident, precise, outcome-driven. Speak like an operator who ships
   products, not a marketer. Prefer concrete metrics over adjectives.
-- Every piece of copy should read as if written by a senior PO addressing
-  other product/engineering leaders — no fluff, no filler adjectives.
-- The brand name is "Pablo UX" (wordmark, footer, `<title>`). The real
-  contact, case studies, and bio underneath are Chanborey's own — never
-  invent a separate fictional team or persona for the brand.
+- The brand name is "Pablo UX" (hero wordmark, header ghost link, footer).
+  The real contact, case studies, and bio underneath are Chanborey's own.
 
-## Design System — Bright, Immersive, Minimal-3D
+## Design System — Gallery on Putty Paper
 
-Stark, high-contrast, playful-but-restrained. A pure-white canvas punctuated
-by dark, high-density cards — not a dark-mode site. Treat this as the single
-source of truth for color usage; do not introduce new colors outside this
-palette without updating this file.
+Warm, flat, restrained, authoritative. A putty-beige canvas alternating with
+pitch-black rooms — no gradients, no shadows, almost no color. Depth comes
+from section cuts and type scale, not elevation. Treat this as the single
+source of truth for color/type usage; do not introduce anything outside it
+without updating this file.
 
 | Token | Value | Usage |
 |---|---|---|
-| `--bg` | `#FFFFFF` | Page canvas. Stark white — never a soft gray. |
-| `--surface` | `#07070D` | Dark high-contrast cards (gallery, store receipts, modals) — a hair of blue undertone |
-| `--surface-hover` | `#101018` | Hover state on dark cards |
-| `--border` | `#262626` | Hairline borders (1px) — reads on both white and dark surfaces |
-| `--electric` | `#0057FF` | Brand accent — the wordmark, headlines, live indicators, links, 3D-tilt glow |
-| `--ink` | `#111111` | Body copy and mono metadata on the white canvas |
-| `--accent` | `#FFFFFF` | Primary button fill *on dark cards* (same value as `--bg`) — pair with `text-ink` for the label, never `text-bg`/white-on-white |
+| `--putty` | `#C4C3B6` | Default page canvas for light sections |
+| `--ink` | `#000000` | Dark section canvas (Gallery, cards, modals); borders on light sections |
+| `--bone` | `#E7E5E4` | Elevated light surfaces (Store section background) |
+| `--chalk` | `#EBEBEB` | Lightest tier — footer, FAQ section base |
+| `--vellum` | `#DFDCD5` | Hairline borders on the light canvas |
+| `--graphite` | `#595855` | Muted secondary text on light sections |
+| `--ash` | `#808080` | Image-placeholder backgrounds only (circular vignettes) |
+| `--paper` | `#FFFFFF` | Text/icons on dark sections, button fills on Ink cards |
 
 Rules:
-- The page canvas is always stark white (`#FFFFFF`). Never introduce a soft
-  gray background for the main canvas.
-- Electric blue (`#0057FF`) is the *only* brand accent color — wordmark,
-  headline keywords, active/live indicators, link hovers, the gallery's
-  hover glow. Do not add a second brand color.
-- Gallery cards, store receipts, and modals are dark (`--surface`) for
-  contrast against the white canvas — body text on them is white/white-`60`
-  opacity, never `--ink` (which is for the light canvas only).
-- Borders are thin (1px) — used to separate cards/sections, not to decorate
-  them.
-- No rounded corners, no drop shadows. Depth comes from the white/black
-  contrast and the 3D tilt interaction (see Gallery below), not soft UI
-  chrome or gradients.
+- **No saturated color, ever.** Every past accent color (crimson, electric
+  blue) is retired. Emphasis comes from italics, size, or weight — never a
+  colored word or colored button.
+- **No shadows, no gradients.** Every surface is flat. Depth = alternating
+  Putty/Ink sections, nothing else.
+- **Corners are deliberate, not default:** cards use `9px`, links `2px`,
+  buttons/pills `28.8px`. Never reach for Tailwind's default radius scale
+  (`rounded-lg`, `rounded-xl`, etc.) — use the exact values above.
+- **No modern digital illustration or stock imagery.** Where the reference
+  system calls for classical-painting imagery and none exists yet, use a
+  flat `--ash` placeholder (see Gallery) — never a fabricated icon/graphic
+  standing in for a photo, and never stock photography.
 
-## Typography
+## Typography — Two Typefaces Only
 
-- **Display wordmark only:** `font-display` (`Bebas Neue`) — tall, condensed,
-  uppercase. Used exclusively for the "PABLO UX" header wordmark, full
-  viewport width. Never use it for body copy or section headings.
-- **Headings / body:** `Inter` or `Plus Jakarta Sans` (`font-sans`), loaded
-  via Google Fonts with weights up to `900`.
-- **Editorial accent pairing:** a headline's second line/clause switches to
-  `font-serif` italic, normal weight, in `--ink` — the electric-sans /
-  black-serif-italic pairing is a signature move, not a one-off (see Hero).
-  `font-serif` resolves to `Source Serif 4` (Google Fonts).
-- **Metadata / badges / tags:** monospace (`font-mono`, JetBrains Mono) —
-  used for nav links, corner metadata, case-study/product ID tags
-  (`PKG/FIN.01`, `NEU/PKG.01`), prices, and timestamps. Pure black/`--ink`
-  on the white canvas, white on dark cards.
-- Never mix: headings/body copy must never use `font-mono` or `font-display`,
-  and badges/metadata must never use the sans-serif family.
+- **`font-davinci`** (Playfair Display, standing in for a licensed "Davinci"
+  serif) — the brand voice. Display and heading duty ONLY: the cropped hero
+  wordmark, section headings, card/product titles, modal headings. Never
+  drops below ~24px. Tight negative letter-spacing at large sizes
+  (`-0.02em` as a working default) so headings read as one carved shape.
+- **`font-sans`** (Inter, standing in for "Helvetica Now") — utility grotesk
+  for everything else: nav, body copy, buttons, labels, stats, captions.
+  Stays small (11–16px). Never takes display duty.
+- Serif is for moments; grotesk is for systems. Don't let them compete on
+  the same line of text.
 
 ## Full Page Layout
 
-Sections appear in this order, matching the header nav (Case Studies →
-Digital Store → Process → FAQ → Contact):
+Full-bleed sections, no `max-w-*` mx-auto page shell — content breathes
+edge-to-edge, only inner content clusters get a max-width. Order:
 
-1. **Header** — a giant edge-to-edge display wordmark ("PABLO UX"),
-   `font-display` (Bebas Neue), uppercase, electric blue, zero line-height,
-   calibrated via `clamp()` to span full width without overflowing at any
-   breakpoint (re-check this whenever the wordmark text changes — condensed
-   display fonts need a much larger `vw` multiplier than a regular sans).
-   A minimal, un-padded nav row sits directly beneath it: title left,
-   `Case Studies | Digital Store | Process | FAQ | Contact` center, email
-   right. Directly below sits a `MarqueeDivider` — a thin, continuously
-   scrolling strip of digits (decorative texture only, no copy).
-2. **Hero** — asymmetrical: headline copy sits on a 12-column grid, pushed
-   right to start around column 6/7, never centered. Dual-font headline
-   (electric sans-black first line, black serif-italic second line),
-   followed by a mono "equation" tagline (`Strategy + Execution + AI =
-   Shipped Product`, electric operators). Fixed corner metadata pinned to
-   the bottom of the hero viewport: local time (live GMT+7 clock) +
-   location bottom-left, a pulsing electric "available for strategy
-   contracts" indicator bottom-right — stacked vertically instead of
-   side-by-side below the `sm` breakpoint so they never overlap.
-3. **Gallery ("Selected Enterprise Case Studies")** — the site's showcase
-   moment. An image-led grid, always in this order:
-   - `PKG/FIN.01` Enterprise B2B Multi-Bank Platform
-   - `PKG/LOG.02` OTO Delivery — Multi-Pin Routing
-   - `PKG/ECO.03` PlasFoodDou Eco-Rewards
-   - `PKG/SVC.04` Home Service Booking Platform
-   Each card is cover art (`CoverArt.tsx`, a generative abstract motif per
-   project — swap for real screenshots in `src/data/caseStudies.ts` once
-   available; never fabricate a fake product screenshot) plus a title/
-   one-liner below it. Interaction is the point here: a subtle cursor-follow
-   3D tilt (`GalleryCard.tsx`, ±8° max, spring-damped — restrained, not a
-   gimmick) and a matching electric radial glow that follows the pointer.
-   On scroll-in, cards use the `revealTilt` variant (`src/lib/motion.ts`) —
-   a small perspective settle (rotateX 8°→0, scale 0.96→1) rather than the
-   plain fade-up used elsewhere, for the "immersive but minimal" scroll
-   feel. Clicking a card opens the existing spec modal (role, overview,
-   highlights, stack).
-4. **Digital Asset Store** — "tear-off receipt" packages: dark cards with a
-   centered `border-dashed` horizontal divider (labeled
-   `✂ Tear along line` in mono micro-copy) and punched circle notches (cut
-   into the card edges using the page's `--bg` color), a mono ID tag
-   (`NEU/PKG.0x`), price ($29–$49), and a white checkout button
-   (`bg-accent text-ink`) wired to the Bakong KHQR checkout modal.
-5. **Process** — a short 4-step editorial breakdown of how engagements run,
-   light canvas, bold ink numbers with electric accents, connected by small
-   electric arrow icons between steps at the `lg` breakpoint.
-6. **FAQ** — styled as a code editor file: a dark `--surface` panel with a
-   `FAQ.md` file-tab header, questions rendered as mono `# Question`
-   headings in electric blue, answers in mono white/70, separated by dashed
-   rules. Content in `src/data/faq.ts` must always be Chanborey's own real
-   answers — never fabricated.
-7. **Contact** — light canvas, bold headline with one electric word, an
-   electric-underlined mono email link (not a boxed button — a white button
-   would vanish against the white canvas here).
-8. **Footer** — a mono copyright line ("Pablo UX — by Nhim Chanborey") plus
-   a live GMT+7 clock.
+1. **Header** — minimal, ~48px row: a circled monogram ("P") top-left
+   linking home, one ghost text link ("Pablo UX" → `#contact`) top-right.
+   No visible nav bar — this is a scroll-through single narrative, not a
+   nav-driven page.
+2. **Hero** — Putty canvas, full `100svh`. A small centered cluster floats
+   in the upper half (eyebrow, `font-davinci` headline with one italicized
+   clause, a stat-pair line, a black pill CTA). The lower half is anchored
+   by the monumental "Pablo UX" wordmark in `font-davinci` — sized to
+   intentionally overflow/crop at the viewport edges (wrapped in
+   `overflow-hidden`, never causing real document scroll — verify with a
+   `scrollWidth`/`clientWidth` check after any size change).
+3. **Gallery ("Selected Enterprise Case Studies")** — full-width **Ink**
+   room. Centered `font-davinci` heading, then the four case studies as
+   circular vignettes (`--ash` placeholder circle — swap for a real
+   licensed image once available, never a fabricated graphic) with a serif
+   caption above and a small hexagon indicator below. Click opens the spec
+   modal (also Ink/Paper).
+4. **Digital Asset Store** — **Bone** canvas. Products as notched Ink cards
+   (`clip-path` corner cuts, not `border-radius` — see `ProductCard.tsx`
+   for the exact polygon), Paper pill checkout button, wired to the Bakong
+   KHQR modal.
+5. **Process** — Putty canvas, 4 steps, `font-davinci` numbers, hexagon
+   connectors between steps at the `lg` breakpoint.
+6. **FAQ ("Notes")** — **Chalk** canvas. Plain wall-label treatment: serif
+   question, grotesk answer, hairline Vellum dividers. Content in
+   `src/data/faq.ts` must always be Chanborey's own real answers.
+7. **Contact** — Putty canvas, centered, serif headline with one italicized
+   (not colored) word, a plain underline-on-hover email link.
+8. **Footer** — Chalk tier: copyright, availability line, live GMT+7 clock.
 
-### Scroll & 3D interaction rules ("immersive, minimal")
+### On matching reference styles (Neutomni, Structured/mxBTC)
 
-- Default section entrance is still the plain `fadeInUp` (opacity 0→1, y
-  20px→0px, `src/lib/motion.ts`) — most of the page stays minimal.
-- The Gallery is the one place that earns extra motion: `revealTilt` on
-  scroll-in, plus per-card cursor-follow 3D tilt on hover. Keep tilt ranges
-  small (≤10°) and spring-damped so it reads as tactile, not dizzying.
-- Don't add scroll-jacking, full-page parallax, or heavy 3D anywhere else —
-  "minimal" is the constraint, not a suggestion.
-
-### On matching neutomni.com
-
-Some structural/visual devices (tear-off receipt UI, mono ID tags, digit
-marquee, equation taglines, FAQ-as-code-file) were originally inspired by
-neutomni.com's aesthetic and interaction patterns. That inspiration is
-style/structure only. Never port neutomni.com's actual business content onto
-this site: no their team names, client names/case studies, testimonials,
-pricing, contact details, or branding. Every section here uses Pablo UX /
-Nhim Chanborey's own real information, or is left as an explicitly-marked
-placeholder in `src/data/` until real content exists — never a fabricated
-testimonial or client attributed to a real name.
+Two external sites have informed this system's structure and visuals over
+time. Both times the rule is the same: **style and structure only, never
+their business content.** Never port a reference site's real team names,
+client names/case studies, testimonials, pricing, contact details, product
+names, or branding onto this site. Every section here uses Pablo UX /
+Chanborey's own real information, or is left as an explicitly-marked
+placeholder in `src/data/` — never a fabricated testimonial, client, or
+brand element attributed to a real name.
 
 ### Bakong KHQR Checkout
 
-A modal (dark-surfaced, matching the card system) that captures the
-buyer's email, generates a Bakong KHQR payment QR code for the selected
-store item, polls for payment confirmation, and on success triggers an
-automated file download plus a download-link email. The real payment
-confirmation must come from a server-side webhook (Bakong sends the
-confirmation to the backend, not the browser) — the frontend only polls an
-internal status endpoint. See `api/README.md` for the integration contract
-and what is stubbed (`src/api/checkout.ts`, `DEMO_MODE`) vs.
-production-ready.
+A modal (Ink-surfaced, matching the card system) that captures the buyer's
+email, generates a Bakong KHQR payment QR code for the selected store item,
+polls for payment confirmation, and on success triggers an automated file
+download plus a download-link email. The real payment confirmation must
+come from a server-side webhook (Bakong sends the confirmation to the
+backend, not the browser) — the frontend only polls an internal status
+endpoint. See `api/README.md` for the integration contract and what is
+stubbed (`src/api/checkout.ts`, `DEMO_MODE`) vs. production-ready.
 
 ## Code conventions
 
@@ -166,9 +122,9 @@ production-ready.
 - Tailwind CSS v4 (CSS-first config via `@theme` in `src/index.css`) — do
   not add a `tailwind.config.js` unless a JS-level config becomes
   necessary.
-- Framer Motion for animation/transitions. Scroll-driven fade-ins
-  (`opacity 0→1`, `y 20px→0px`, via `whileInView`) are the standard
-  section-entry animation — see `src/lib/motion.ts` for the shared variant,
-  and `revealTilt`/`revealTiltViewport` for the Gallery's 3D variant.
+- Framer Motion for animation/transitions; keep it to the shared
+  `fadeInUp`/`fadeInUpViewport` scroll-in variant (`src/lib/motion.ts`) —
+  this system's drama is typographic, not motion-driven. No 3D tilt, no
+  parallax, no scroll-jacking.
 - Keep mock/demo content clearly separated in `src/data/` so it's obvious
   what's placeholder content vs. real copy.

@@ -1,35 +1,35 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
 import { fadeInUp, fadeInUpViewport } from '../lib/motion'
 
 export function Contact() {
   return (
-    <section id="contact" className="px-4 py-24 sm:px-6">
+    <section id="contact" className="bg-putty px-6 py-24 text-center sm:px-10">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={fadeInUpViewport}
         variants={fadeInUp}
         transition={{ duration: 0.5 }}
-        className="mx-auto flex max-w-6xl flex-col gap-6"
+        className="mx-auto flex max-w-xl flex-col items-center gap-6"
       >
-        <span className="font-mono text-xs uppercase tracking-wider text-ink/60">
+        <span className="font-sans text-xs uppercase tracking-widest text-graphite">
           Contact
         </span>
-        <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-ink md:text-5xl">
-          Let&rsquo;s scope the next{' '}
-          <span className="text-electric">roadmap.</span>
+        <h2
+          className="font-davinci text-ink"
+          style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)', letterSpacing: '-0.02em' }}
+        >
+          Let&rsquo;s scope the next <em className="italic">roadmap.</em>
         </h2>
-        <p className="max-w-md text-sm text-ink/70">
+        <p className="max-w-md text-sm text-graphite">
           Open for strategy contracts, fractional PO engagements, and AI
           product advisory work.
         </p>
         <a
           href="mailto:nhimchanborey@gmail.com"
-          className="inline-flex w-fit items-center gap-2 border-b-2 border-electric pb-1 font-mono text-lg text-ink transition-colors hover:text-electric"
+          className="font-sans text-lg text-ink underline-offset-4 transition-[text-decoration] hover:underline"
         >
           nhimchanborey@gmail.com
-          <ArrowUpRight size={20} />
         </a>
       </motion.div>
     </section>

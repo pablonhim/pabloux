@@ -6,7 +6,6 @@ import { Footer } from './components/Footer'
 import { Gallery } from './components/Gallery'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
-import { MarqueeDivider } from './components/MarqueeDivider'
 import { Process } from './components/Process'
 import { Store } from './components/Store'
 import type { Product } from './data/products'
@@ -15,9 +14,8 @@ function App() {
   const [checkoutProduct, setCheckoutProduct] = useState<Product | null>(null)
 
   return (
-    <div className="min-h-svh bg-bg text-ink">
+    <div className="min-h-svh bg-putty text-ink">
       <Header />
-      <MarqueeDivider />
       <Hero />
       <Gallery />
       <Store onBuy={setCheckoutProduct} />
